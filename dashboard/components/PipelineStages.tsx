@@ -19,7 +19,6 @@ export function PipelineStages({ currentStage, status }: PipelineStagesProps) {
           const isCompleted = idx < currentIdx || status === "completed";
           const isCurrent = idx === currentIdx && status !== "completed";
           const isFailed = isCurrent && status === "failed";
-          const isUpcoming = idx > currentIdx && status !== "completed";
 
           return (
             <div key={stage} className="flex flex-col items-center flex-1 min-w-0">

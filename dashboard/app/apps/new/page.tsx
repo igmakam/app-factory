@@ -5,13 +5,6 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { PlusCircle, Loader2 } from "lucide-react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
@@ -47,13 +40,13 @@ export default function NewAppPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="mx-auto max-w-2xl space-y-6">
       <div>
-        <h1 className="text-2xl font-bold flex items-center gap-2">
+        <h1 className="flex items-center gap-2 text-2xl font-bold">
           <PlusCircle size={24} /> New App
         </h1>
-        <p className="text-muted-foreground text-sm mt-1">
-          Describe your app idea and let the factory build it
+        <p className="mt-1 text-sm text-muted-foreground">
+          Describe your app idea and let the factory build it.
         </p>
       </div>
 
@@ -63,12 +56,12 @@ export default function NewAppPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Idea */}
             <div className="space-y-2">
-              <label className="text-sm font-medium">
+              <label htmlFor="idea" className="text-sm font-medium">
                 App Idea <span className="text-red-500">*</span>
               </label>
               <Textarea
+                id="idea"
                 placeholder="Describe your app idea in detail. Be specific about features, target audience, and unique value proposition..."
                 value={idea}
                 onChange={(e) => setIdea(e.target.value)}
@@ -77,42 +70,37 @@ export default function NewAppPage() {
                 required
               />
               <p className="text-xs text-muted-foreground">
-                {idea.length} characters · The more detail, the better the output
+                {idea.length} characters · The more detail, the better the output.
               </p>
             </div>
 
-            {/* Platform */}
             <div className="space-y-2">
-              <label className="text-sm font-medium">Platform</label>
-              <Select value={platform} onValueChange={setPlatform}>
-                <SelectTrigger className="w-48">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="ios">iOS only</SelectItem>
-                  <SelectItem value="android">Android only</SelectItem>
-                  <SelectItem value="both">iOS + Android</SelectItem>
-                </SelectContent>
-              </Select>
+              <label htmlFor="platform" className="text-sm font-medium">
+                Platform
+              </label>
+              <select
+                id="platform"
+                value={platform}
+                onChange={(e) => setPlatform(e.target.value)}
+                className="flex h-10 w-48 rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <option value="ios">iOS only</option>
+                <option value="android">Android only</option>
+                <option value="both">iOS + Android</option>
+              </select>
               <p className="text-xs text-muted-foreground">
-                Target platform for App Store / Google Play submission
+                Target platform for App Store / Google Play submission.
               </p>
             </div>
 
-            {/* Error */}
             {error && (
-              <div className="p-3 rounded-md bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+              <div className="rounded-md border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-400">
                 {error}
               </div>
             )}
 
-            {/* Actions */}
             <div className="flex items-center gap-3 pt-2">
-              <Button
-                type="submit"
-                disabled={loading || !idea.trim()}
-                className="min-w-32"
-              >
+              <Button type="submit" disabled={loading || !idea.trim()} className="min-w-32">
                 {loading ? (
                   <>
                     <Loader2 size={16} className="mr-2 animate-spin" />
@@ -128,7 +116,7 @@ export default function NewAppPage() {
               <button
                 type="button"
                 onClick={() => router.back()}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Cancel
               </button>
@@ -137,7 +125,6 @@ export default function NewAppPage() {
         </CardContent>
       </Card>
 
-      {/* Pipeline preview */}
       <Card>
         <CardHeader>
           <CardTitle className="text-base">What happens next?</CardTitle>
@@ -157,18 +144,15 @@ export default function NewAppPage() {
               "done",
             ].map((stage, i, arr) => (
               <div key={stage} className="flex items-center gap-2">
-                <span className="text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground">
+                <span className="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">
                   {stage}
                 </span>
-                {i < arr.length - 1 && (
-                  <span className="text-muted-foreground/40 text-xs">→</span>
-                )}
+                {i < arr.length - 1 && <span className="text-xs text-muted-foreground/40">→</span>}
               </div>
             ))}
           </div>
-          <p className="text-xs text-muted-foreground mt-3">
-            Your idea will be validated, planned, and turned into a fully
-            built & submitted mobile app automatically.
+          <p className="mt-3 text-xs text-muted-foreground">
+            Your idea will be validated, planned, and turned into a built and submitted mobile app automatically.
           </p>
         </CardContent>
       </Card>
