@@ -1,0 +1,1058 @@
+[
+  {
+    "id": 16,
+    "idea_name": "SeniorSecure",
+    "product_type": "SaaS",
+    "description": "SeniorSecure is a scalable and easy-to-use SaaS platform designed to enhance security and peace of mind for the elderly living independently. It leverages AI and IoT devices to provide real-time health monitoring, emergency alerts, and daily activity insights, ensuring safety and timely interventions.",
+    "overall_score": 6.5,
+    "structured_idea": {
+      "idea_name": "SeniorSecure",
+      "product_type": "SaaS",
+      "problem_statement": "Many elderly individuals living independently face safety risks and health emergencies without timely assistance, leading to high stress for them and their families.",
+      "proposed_solution": "An AI-driven platform that integrates with IoT devices to monitor health metrics, detect unusual activities, and send instant alerts to caregivers and emergency services, providing real-time insights and interventions.",
+      "target_users": "Elderly individuals living independently, their families, and caregivers.",
+      "use_case": "Families and caregivers can monitor the well-being of their elderly loved ones remotely, receiving alerts for emergencies, tracking daily activities, and ensuring timely health interventions.",
+      "monetization_model": "Subscription model targeting families and caregivers, with tiered pricing based on features and number of users monitored.",
+      "core_value_proposition": "SeniorSecure ensures peace of mind by providing real-time health monitoring and emergency alerts to families and caregivers of elderly individuals living independently."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 5,
+      "market_demand": 8,
+      "build_complexity": 4,
+      "monetization_strength": 6,
+      "scalability": 7,
+      "overall_score": 6.5,
+      "scoring_notes": {
+        "viability_score": "The technology is feasible with current AI and IoT advancements, but integration and reliability are challenging.",
+        "competition_density": "The market has existing players in elder care tech, but there's room for innovation with AI and IoT integration.",
+        "market_demand": "Aging population trends indicate strong demand for elder care solutions, especially for independent living.",
+        "build_complexity": "Developing a reliable AI-driven platform with IoT integration is complex and requires significant resources.",
+        "monetization_strength": "Subscription models are viable, but pricing must be carefully balanced with perceived value.",
+        "scalability": "The platform can scale with increased IoT adoption, but requires robust infrastructure and customer support."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Critical to ensure the product can be developed and used effectively.",
+          "competition_density": "Important to assess market saturation and potential differentiation.",
+          "market_demand": "High weight due to the importance of addressing a real and growing need.",
+          "build_complexity": "Lower weight as technical challenges can be overcome with resources.",
+          "monetization_strength": "Significant weight as the business needs a strong revenue model.",
+          "scalability": "Essential for long-term growth and market penetration."
+        },
+        "overall_formula": "(7*0.25 + 5*0.15 + 8*0.25 + 4*0.10 + 6*0.15 + 7*0.10) = 6.5",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = saturated market, 5 = moderate competition, 10 = blue ocean",
+          "market_demand": "0 = no demand, 5 = some demand, 10 = high demand and growth",
+          "build_complexity": "0 = very hard to build, 5 = moderate complexity, 10 = very easy to build",
+          "monetization_strength": "0 = poor revenue potential, 5 = moderate potential, 10 = strong revenue model",
+          "scalability": "0 = not scalable, 5 = moderately scalable, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 16,
+    "learning_note": "This idea focuses on a critical and growing need within the aging population niche, leveraging AI and IoT for high-impact problem-solving while ensuring a simple build with strong subscription-based monetization potential.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-04T11:16:26.000Z"
+  },
+  {
+    "id": 15,
+    "idea_name": "Sustainable Connect",
+    "product_type": "SaaS",
+    "description": "Sustainable Connect is a SaaS platform that empowers small and medium-sized enterprises (SMEs) to seamlessly integrate sustainable practices into their supply chain operations. By providing real-time analytics, benchmarking tools, and AI-driven insights, the platform helps businesses meet regulatory requirements, reduce costs, and enhance their brand reputation.",
+    "overall_score": 7.2,
+    "structured_idea": {
+      "idea_name": "Sustainable Connect",
+      "product_type": "SaaS",
+      "problem_statement": "SMEs face increasing pressure to adopt sustainable practices in their supply chains but often lack the resources and expertise to do so effectively.",
+      "proposed_solution": "Offer a user-friendly SaaS platform that provides real-time analytics, benchmarking tools, and AI-driven insights to help SMEs integrate sustainable practices into their supply chains easily.",
+      "target_users": "Small and medium-sized enterprises across various industries looking to enhance their sustainability efforts.",
+      "use_case": "Businesses use the platform to track and analyze their supply chain operations, gain insights for sustainability improvements, and ensure compliance with environmental regulations.",
+      "monetization_model": "Subscription-based model with different tiers based on the level of analytics and insights provided.",
+      "core_value_proposition": "Sustainable Connect simplifies the process of adopting and managing sustainable practices in supply chains, leading to cost savings, compliance assurance, and improved brand reputation for SMEs."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 6,
+      "market_demand": 8,
+      "build_complexity": 6,
+      "monetization_strength": 7,
+      "scalability": 8,
+      "overall_score": 7.2,
+      "scoring_notes": {
+        "viability_score": "The platform is realistically buildable and usable with current technology.",
+        "competition_density": "There are existing players in the sustainability analytics space, but it's not overly saturated.",
+        "market_demand": "Increasing regulatory pressure and consumer demand make this a high-need area.",
+        "build_complexity": "Building a SaaS platform with analytics and AI is moderately complex but feasible.",
+        "monetization_strength": "Subscription models are proven, and tiered pricing can capture various SME needs.",
+        "scalability": "The SaaS model allows for easy scaling across different industries and geographies."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Viability is crucial as the product must be realistically buildable and usable.",
+          "competition_density": "Competition affects the ability to capture market share.",
+          "market_demand": "A strong market demand is essential for the success of the business.",
+          "build_complexity": "Complexity impacts time and resources needed for development.",
+          "monetization_strength": "Revenue potential is critical for business sustainability.",
+          "scalability": "Scalability ensures long-term growth potential."
+        },
+        "overall_formula": "(7*0.25 + 6*0.15 + 8*0.25 + 6*0.10 + 7*0.15 + 8*0.10) = 7.2",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = saturated market, 5 = moderate competition, 10 = blue ocean",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = high demand",
+          "build_complexity": "0 = very hard, 5 = moderately hard, 10 = very easy",
+          "monetization_strength": "0 = poor revenue potential, 5 = moderate potential, 10 = high potential",
+          "scalability": "0 = very limited scalability, 5 = moderate scalability, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 15,
+    "learning_note": "I focused on an emerging trend of sustainability in supply chains, targeting an underserved niche with a clear regulatory push and cost-saving incentives, ensuring a practical, scalable SaaS solution with strong monetization potential.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-04T07:53:31.000Z"
+  },
+  {
+    "id": 14,
+    "idea_name": "EcoHire",
+    "product_type": "SaaS",
+    "description": "EcoHire is an AI-driven recruitment platform helping companies meet sustainability goals by identifying and hiring talent with expertise in environmental practices. With global green initiatives on the rise, EcoHire streamlines the hiring process for eco-conscious roles, catering to businesses aiming to reduce their carbon footprint.",
+    "overall_score": 7.1,
+    "structured_idea": {
+      "idea_name": "EcoHire",
+      "product_type": "SaaS",
+      "problem_statement": "Companies face challenges in recruiting specialized talent to meet new sustainability mandates and align with eco-friendly initiatives, as they lack a focused platform for finding such experts.",
+      "proposed_solution": "EcoHire leverages AI to match companies with candidates skilled in sustainability practices, optimizing the recruitment process for eco-centric roles and helping businesses achieve their environmental goals.",
+      "target_users": "HR departments, recruiters, and businesses seeking to enhance their sustainability credentials.",
+      "use_case": "Companies aiming to integrate sustainability into their operations can use EcoHire to efficiently identify and hire professionals with the necessary expertise in eco-friendly practices.",
+      "monetization_model": "Subscription-based model for companies, with tiered pricing based on the number of hires and platform usage.",
+      "core_value_proposition": "EcoHire uniquely positions itself by combining AI-driven talent matching with a focus on sustainability, addressing the rising demand for eco-conscious roles amid tightening regulatory pressures."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 6,
+      "market_demand": 8,
+      "build_complexity": 6,
+      "monetization_strength": 7,
+      "scalability": 8,
+      "overall_score": 7.1,
+      "scoring_notes": {
+        "viability_score": "The idea is viable with current technology and market trends supporting sustainability. However, execution will require specialized AI and recruitment expertise.",
+        "competition_density": "While there are general recruitment platforms, few focus exclusively on sustainability roles, providing a moderate competitive landscape.",
+        "market_demand": "There is a growing demand for sustainability roles driven by regulatory pressures and corporate responsibility goals.",
+        "build_complexity": "Building the platform is moderately complex due to the need for AI integration and a specialized database of sustainability roles.",
+        "monetization_strength": "Subscription models are proven in SaaS, and tiered pricing aligns well with varying company sizes and hiring needs.",
+        "scalability": "The platform can scale well with increased demand for eco-centric roles and international expansion potential."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Viability is crucial as it determines if the idea can be realistically implemented.",
+          "competition_density": "Understanding market saturation helps gauge entry difficulty and potential differentiation.",
+          "market_demand": "Demand is critical for ensuring that the product will have a user base.",
+          "build_complexity": "Ease of building impacts time to market and initial investment.",
+          "monetization_strength": "Revenue potential is essential for business sustainability.",
+          "scalability": "Ability to grow determines long-term success and market reach."
+        },
+        "overall_formula": "(7*0.25 + 6*0.15 + 8*0.25 + 6*0.10 + 7*0.15 + 8*0.10) = 7.1",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = highly saturated, 5 = some competition, 10 = no direct competition",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = high demand",
+          "build_complexity": "0 = very hard, 5 = moderate difficulty, 10 = very easy",
+          "monetization_strength": "0 = poor revenue potential, 5 = moderate potential, 10 = high potential",
+          "scalability": "0 = very limited growth, 5 = moderate growth potential, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 14,
+    "learning_note": "I focused on the growing need for sustainability in business operations, targeting the underserved niche of eco-conscious recruitment with a scalable, AI-driven solution to enhance market demand and monetization potential.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-03T18:40:48.000Z"
+  },
+  {
+    "id": 13,
+    "idea_name": "SustainablOps",
+    "product_type": "SaaS",
+    "description": "SustainablOps is a SaaS platform designed to help small to medium-sized manufacturers optimize their operations for sustainability and efficiency. By using AI-driven analytics, it identifies waste reduction and energy-saving opportunities, providing actionable insights to meet both regulatory requirements and cost-saving goals.",
+    "overall_score": 7.0,
+    "structured_idea": {
+      "idea_name": "SustainablOps",
+      "product_type": "SaaS",
+      "problem_statement": "Many small to medium-sized manufacturers struggle with optimizing their operations for sustainability, facing regulatory pressures and rising operational costs without the resources of larger corporations.",
+      "proposed_solution": "A SaaS platform that utilizes AI-driven analytics to identify and provide actionable insights for waste reduction and energy-saving opportunities, tailored specifically for the manufacturing industry.",
+      "target_users": "Small to medium-sized manufacturing companies aiming to improve sustainability and reduce operational costs.",
+      "use_case": "Manufacturers use SustainablOps to analyze their current operational processes, receive customized recommendations for sustainability improvements, and track their progress towards regulatory compliance and cost savings.",
+      "monetization_model": "Subscription-based model with tiered pricing based on company size and feature access.",
+      "core_value_proposition": "Empower manufacturers to easily and affordably optimize operations for sustainability, enhancing regulatory compliance, and reducing costs through cutting-edge AI technology."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 6,
+      "market_demand": 8,
+      "build_complexity": 5,
+      "monetization_strength": 7,
+      "scalability": 8,
+      "overall_score": 7.0,
+      "scoring_notes": {
+        "viability_score": "The SaaS model is well-established and feasible to build, especially with AI technology. However, integration with existing manufacturing systems could pose challenges.",
+        "competition_density": "There are existing players in the sustainability and operational efficiency space, but the focus on small to medium manufacturers provides a niche.",
+        "market_demand": "Increasing regulatory pressures and cost concerns drive demand for sustainability solutions in manufacturing.",
+        "build_complexity": "AI analytics and integration with diverse manufacturing processes can be complex, requiring significant development effort.",
+        "monetization_strength": "Subscription models are effective for SaaS, and tiered pricing can capture a wide range of customer sizes.",
+        "scalability": "The platform can scale well with additional features and markets, given the broad applicability of sustainability solutions."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Viability is crucial as it determines if the idea can be realistically implemented and sustained.",
+          "competition_density": "Understanding market saturation helps gauge potential for differentiation and entry.",
+          "market_demand": "Demand is key to ensuring there is a customer base willing to pay for the solution.",
+          "build_complexity": "Complexity impacts development time and cost, affecting time-to-market.",
+          "monetization_strength": "Revenue potential is essential for the business's financial sustainability.",
+          "scalability": "Scalability determines long-term growth potential and market reach."
+        },
+        "overall_formula": "(7*0.25 + 6*0.15 + 8*0.25 + 5*0.10 + 7*0.15 + 8*0.10) = 7.0",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = saturated market, 5 = moderate competition, 10 = blue ocean",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = high demand",
+          "build_complexity": "0 = very hard, 5 = moderate difficulty, 10 = very easy",
+          "monetization_strength": "0 = poor revenue potential, 5 = moderate potential, 10 = strong potential",
+          "scalability": "0 = very limited growth, 5 = moderate growth potential, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 13,
+    "learning_note": "I focused on targeting the underserved niche of small to medium-sized manufacturers, addressing both regulatory pressures and cost-saving needs, with a scalable SaaS solution leveraging AI for actionable insights.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-03T16:44:12.000Z"
+  },
+  {
+    "id": 12,
+    "idea_name": "AquaGuard",
+    "product_type": "SaaS",
+    "description": "AquaGuard is a revolutionary SaaS platform designed to help businesses and municipalities monitor and manage water usage and quality in real-time. With the growing concerns over water scarcity and pollution, AquaGuard provides AI-driven insights to optimize water consumption, detect leaks, and ensure compliance with environmental regulations.",
+    "overall_score": 7.5,
+    "structured_idea": {
+      "idea_name": "AquaGuard",
+      "product_type": "SaaS",
+      "problem_statement": "Water scarcity and pollution are pressing global issues, with businesses and municipalities struggling to manage water resources efficiently and comply with environmental regulations.",
+      "proposed_solution": "AquaGuard offers real-time monitoring and AI-driven analytics to optimize water usage, detect leaks early, and ensure compliance with environmental standards, thereby reducing water waste and costs.",
+      "target_users": "Businesses in high-water-use industries, municipalities, and environmental agencies.",
+      "use_case": "A factory uses AquaGuard to monitor its water usage and detect leaks in its system, saving significant costs and ensuring compliance with local water regulations.",
+      "monetization_model": "Subscription-based, with tiered pricing based on water usage volume and number of monitoring locations.",
+      "core_value_proposition": "AquaGuard helps users save on water costs, reduce waste, and ensure regulatory compliance with minimal effort."
+    },
+    "scores": {
+      "viability_score": 8,
+      "competition_density": 6,
+      "market_demand": 9,
+      "build_complexity": 5,
+      "monetization_strength": 7,
+      "scalability": 8,
+      "overall_score": 7.5,
+      "scoring_notes": {
+        "viability_score": "The technology is feasible with current AI and IoT capabilities, and there is a clear use case.",
+        "competition_density": "Some competition exists, but the market is not saturated, with opportunities for differentiation.",
+        "market_demand": "Strong demand due to increasing water scarcity and regulatory pressures.",
+        "build_complexity": "Moderate complexity; requires integration of IoT sensors, AI, and analytics.",
+        "monetization_strength": "Subscription model is viable, but pricing must be competitive.",
+        "scalability": "Scalable across different industries and regions with similar water management needs."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Viability is crucial to ensure the solution can be realistically implemented.",
+          "competition_density": "Understanding competition helps gauge the ease of market entry.",
+          "market_demand": "High demand is essential for the solution's success.",
+          "build_complexity": "Complexity affects the time and resources needed for development.",
+          "monetization_strength": "Revenue potential is key for investor interest.",
+          "scalability": "Scalability ensures long-term growth potential."
+        },
+        "overall_formula": "(8*0.25 + 6*0.15 + 9*0.25 + 5*0.10 + 7*0.15 + 8*0.10) = 7.5",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = saturated market, 5 = moderate competition, 10 = blue ocean",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = high demand",
+          "build_complexity": "0 = very hard, 5 = moderately complex, 10 = very easy",
+          "monetization_strength": "0 = poor revenue potential, 5 = moderate potential, 10 = high potential",
+          "scalability": "0 = not scalable, 5 = moderately scalable, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 12,
+    "learning_note": "I focused on addressing the urgent global issue of water management in both industrial and municipal contexts, leveraging growing environmental concerns and regulatory pressures to drive demand. By providing a highly scalable and easy-to-deploy solution, AquaGuard maximizes both market potential and monetization strength.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-03T12:00:19.000Z"
+  },
+  {
+    "id": 11,
+    "idea_name": "GreenGuardians",
+    "product_type": "SaaS",
+    "description": "GreenGuardians is a SaaS platform designed to help businesses proactively manage their environmental impact by offering real-time analytics and actionable insights. With the increasing regulatory pressure and consumer demand for sustainable practices, GreenGuardians empowers companies with the tools to achieve eco-compliance while optimizing operational efficiency.",
+    "overall_score": 7.0,
+    "structured_idea": {
+      "idea_name": "GreenGuardians",
+      "product_type": "SaaS",
+      "problem_statement": "Businesses face growing pressure to adopt sustainable practices due to regulatory requirements and consumer expectations, but lack the tools to efficiently manage and track their environmental impact.",
+      "proposed_solution": "GreenGuardians provides real-time analytics and insights for businesses to monitor their environmental impact, helping them achieve compliance and optimize efficiency through a user-friendly platform.",
+      "target_users": "Small to medium-sized enterprises (SMEs) in manufacturing, logistics, and retail sectors.",
+      "use_case": "Companies use GreenGuardians to monitor and reduce their carbon footprint, streamline regulatory reporting, and enhance their sustainability credentials.",
+      "monetization_model": "Subscription-based model with tiered pricing based on company size and feature access.",
+      "core_value_proposition": "GreenGuardians offers SMEs an affordable and easy-to-use platform to manage environmental impact, ensuring compliance and operational efficiency with a clear ROI."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 6,
+      "market_demand": 8,
+      "build_complexity": 5,
+      "monetization_strength": 7,
+      "scalability": 8,
+      "overall_score": 7.0,
+      "scoring_notes": {
+        "viability_score": "The platform is realistically buildable with existing technology, but requires significant domain expertise.",
+        "competition_density": "There are existing players in the sustainability SaaS space, but room for differentiation exists.",
+        "market_demand": "Increasing regulatory and consumer pressures make this a high-demand area.",
+        "build_complexity": "Building requires integration with various data sources and compliance standards, moderately complex.",
+        "monetization_strength": "Subscription model is proven, but success depends on perceived value and pricing strategy.",
+        "scalability": "SaaS platforms are inherently scalable, and the target market of SMEs is large."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Viability is crucial as it determines if the solution can be effectively developed and used.",
+          "competition_density": "Understanding market saturation helps gauge the opportunity for differentiation.",
+          "market_demand": "Demand is critical to ensure there is a market for the product.",
+          "build_complexity": "Complexity affects the time and cost to bring the product to market.",
+          "monetization_strength": "Revenue potential is important for business sustainability.",
+          "scalability": "Scalability determines the potential for growth and market capture."
+        },
+        "overall_formula": "(7*0.25 + 6*0.15 + 8*0.25 + 5*0.10 + 7*0.15 + 8*0.10) = 7.0",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = highly saturated, 5 = moderate competition, 10 = no competition",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = high demand",
+          "build_complexity": "0 = very hard to build, 5 = moderately hard, 10 = very easy to build",
+          "monetization_strength": "0 = very low revenue potential, 5 = moderate potential, 10 = high potential",
+          "scalability": "0 = very low scalability, 5 = moderate scalability, 10 = high scalability"
+        }
+      }
+    },
+    "generation_number": 11,
+    "learning_note": "I aimed to enhance my previous strategies by targeting a pressing compliance issue in a less saturated market, leveraging a subscription model with strong retention potential due to regulatory pressures.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-03T12:00:03.000Z"
+  },
+  {
+    "id": 10,
+    "idea_name": "RemoteMind",
+    "product_type": "SaaS",
+    "description": "RemoteMind is an AI-powered mental wellness SaaS platform designed specifically for remote workers. It offers personalized, real-time mental health insights and support, helping organizations enhance employee well-being and productivity.",
+    "overall_score": 6.8,
+    "structured_idea": {
+      "idea_name": "RemoteMind",
+      "product_type": "SaaS",
+      "problem_statement": "Remote workers often face increased stress and isolation, impacting their mental health and productivity. Companies need solutions to effectively support remote employees' well-being.",
+      "proposed_solution": "RemoteMind provides AI-driven mental health monitoring and personalized well-being programs that integrate seamlessly with remote work tools, offering actionable insights and support to boost employee wellness.",
+      "target_users": "Companies with remote workforces and the remote employees themselves.",
+      "use_case": "Incorporate RemoteMind into the company\u2019s workflow to monitor employee well-being, provide tailored mental health resources, and foster a supportive remote work environment.",
+      "monetization_model": "B2B SaaS subscription model with tiered pricing based on company size and features.",
+      "core_value_proposition": "Enhance remote employee satisfaction and productivity by using AI to deliver personalized mental health support and insights, reducing burnout and turnover."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 4,
+      "market_demand": 8,
+      "build_complexity": 6,
+      "monetization_strength": 7,
+      "scalability": 8,
+      "overall_score": 6.8,
+      "scoring_notes": {
+        "viability_score": "The product is realistically buildable with current AI and SaaS technologies and can be integrated into existing remote work tools.",
+        "competition_density": "The mental health and remote work support market is growing but has numerous players, making it competitive.",
+        "market_demand": "There is a strong and increasing demand for remote work mental health solutions, especially post-pandemic.",
+        "build_complexity": "Building the AI-driven solution is moderately complex but feasible with existing technology.",
+        "monetization_strength": "The B2B SaaS model is strong, with potential for recurring revenue from companies investing in employee well-being.",
+        "scalability": "The SaaS model allows for easy scaling across different company sizes and industries."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Viability is crucial as the product must be feasible to develop and implement.",
+          "competition_density": "Understanding market saturation helps assess the ease of market entry.",
+          "market_demand": "Demand is critical to ensure there is a real need for the solution.",
+          "build_complexity": "Complexity affects development time and cost, impacting feasibility.",
+          "monetization_strength": "Revenue potential is key for long-term business sustainability.",
+          "scalability": "Scalability ensures the business can grow and serve more customers effectively."
+        },
+        "overall_formula": "(7*0.25 + 4*0.15 + 8*0.25 + 6*0.10 + 7*0.15 + 8*0.10) = 6.8",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = saturated market, 5 = moderate competition, 10 = blue ocean",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = high demand",
+          "build_complexity": "0 = very hard, 5 = moderate complexity, 10 = very easy",
+          "monetization_strength": "0 = poor revenue potential, 5 = moderate potential, 10 = high revenue potential",
+          "scalability": "0 = not scalable, 5 = moderately scalable, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 10,
+    "learning_note": "I focused on the growing trend of remote work and the urgent need for mental health solutions in this environment, providing a subscription-based SaaS with high demand and clear value for businesses looking to support their remote teams.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-03T10:38:41.000Z"
+  },
+  {
+    "id": 9,
+    "idea_name": "CarbonTrackr",
+    "product_type": "SaaS",
+    "description": "CarbonTrackr is a SaaS platform designed to help businesses and individuals measure, monitor, and reduce their carbon footprint. With real-time analytics and actionable insights, it empowers users to make sustainable choices and comply with increasing environmental regulations.",
+    "overall_score": 6.6,
+    "structured_idea": {
+      "idea_name": "CarbonTrackr",
+      "product_type": "SaaS",
+      "problem_statement": "Many businesses and individuals face difficulty in understanding their carbon footprint and lack tools to effectively track and reduce it amidst increasing regulatory pressure.",
+      "proposed_solution": "Provide a user-friendly SaaS platform that tracks carbon emissions using AI and provides real-time analytics and actionable insights to help reduce environmental impact.",
+      "target_users": "Small to medium-sized businesses, environmentally conscious individuals, sustainability teams within larger enterprises",
+      "use_case": "Businesses and individuals can input their activities or integrate with existing tools to automatically calculate and track their emissions, receiving recommendations to reduce their carbon footprint.",
+      "monetization_model": "Subscription-based model with different tiers for individuals, SMBs, and enterprise clients offering various levels of features and insights.",
+      "core_value_proposition": "CarbonTrackr simplifies the complex task of carbon tracking and reduction, offering clear insights that lead to tangible environmental benefits and regulatory compliance."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 4,
+      "market_demand": 8,
+      "build_complexity": 6,
+      "monetization_strength": 7,
+      "scalability": 8,
+      "overall_score": 6.6,
+      "scoring_notes": {
+        "viability_score": "The platform is realistically buildable with current technology and has a clear use case, but requires significant data integration.",
+        "competition_density": "There are several existing platforms addressing carbon tracking, making the market somewhat saturated.",
+        "market_demand": "High demand due to increasing regulatory pressure and environmental awareness.",
+        "build_complexity": "Moderate complexity; AI integration and data handling require expertise but are feasible.",
+        "monetization_strength": "Subscription model is viable with potential for recurring revenue, especially from enterprise clients.",
+        "scalability": "High scalability potential due to SaaS model and broad applicability across industries."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Viability is crucial as it determines if the product can be realistically developed and used.",
+          "competition_density": "Lower competition density indicates a more open market, important but less critical than viability.",
+          "market_demand": "High demand is essential for adoption and success, hence a significant weight.",
+          "build_complexity": "While important, complexity is less critical as it can often be overcome with resources.",
+          "monetization_strength": "Revenue potential is key for sustainability and growth of the business.",
+          "scalability": "Scalability ensures long-term growth and market penetration, but initial viability and demand are prioritized."
+        },
+        "overall_formula": "(7*0.25 + 4*0.15 + 8*0.25 + 6*0.10 + 7*0.15 + 8*0.10) = 6.6",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = highly saturated, 5 = moderate competition, 10 = no competition",
+          "market_demand": "0 = no demand, 5 = some interest, 10 = high demand",
+          "build_complexity": "0 = very hard, 5 = moderate difficulty, 10 = very easy",
+          "monetization_strength": "0 = very low revenue potential, 5 = moderate potential, 10 = high potential",
+          "scalability": "0 = not scalable, 5 = moderately scalable, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 9,
+    "learning_note": "I focused on the growing trend of environmental responsibility and sustainability, targeting both businesses and individuals with a clear SaaS solution that leverages real-time analytics to meet a pressing regulatory need while offering strong monetization potential through subscriptions.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-03T10:37:57.000Z"
+  },
+  {
+    "id": 8,
+    "idea_name": "WasteWise",
+    "product_type": "SaaS",
+    "description": "WasteWise is an AI-driven waste management platform that empowers businesses, especially in hospitality and retail sectors, to reduce waste, optimize resource use, and comply with environmental regulations. By providing real-time analytics and actionable insights, WasteWise helps companies cut costs while enhancing their sustainability efforts.",
+    "overall_score": 7.3,
+    "structured_idea": {
+      "idea_name": "WasteWise",
+      "product_type": "SaaS",
+      "problem_statement": "Businesses, particularly in high-waste industries like hospitality and retail, struggle with inefficient waste management, leading to increased costs and regulatory pressures.",
+      "proposed_solution": "Provide a user-friendly SaaS platform that leverages AI to offer real-time waste tracking, predictive analytics, and actionable insights for reducing waste output and optimizing resource use.",
+      "target_users": "Businesses in the hospitality and retail sectors",
+      "use_case": "A hotel chain uses WasteWise to track and manage waste daily, receiving alerts and insights on how to reduce costs and improve sustainability practices.",
+      "monetization_model": "Subscription model with tiered pricing based on business size and feature requirements.",
+      "core_value_proposition": "Help businesses save money and enhance sustainability by providing precise waste management insights and solutions, leading to a competitive advantage in a rapidly greening economy."
+    },
+    "scores": {
+      "viability_score": 8,
+      "competition_density": 6,
+      "market_demand": 8,
+      "build_complexity": 5,
+      "monetization_strength": 7,
+      "scalability": 8,
+      "overall_score": 7.3,
+      "scoring_notes": {
+        "viability_score": "The solution is technically feasible and aligns well with current technological capabilities in AI and SaaS.",
+        "competition_density": "There are existing players in waste management solutions, but AI-driven SaaS is a newer niche.",
+        "market_demand": "High demand due to increasing regulatory pressures and sustainability goals in target sectors.",
+        "build_complexity": "Building AI-driven analytics is complex, but the SaaS model is well-understood.",
+        "monetization_strength": "Subscription model is proven, but pricing and feature differentiation are critical.",
+        "scalability": "SaaS platforms are inherently scalable, particularly with cloud infrastructure."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Critical to ensure the solution can be realistically implemented and used effectively.",
+          "competition_density": "Understanding market saturation helps gauge entry difficulty.",
+          "market_demand": "Demand is crucial for adoption and success.",
+          "build_complexity": "Complexity affects time-to-market and resource allocation.",
+          "monetization_strength": "Revenue potential is key for business sustainability.",
+          "scalability": "Scalability determines long-term growth potential."
+        },
+        "overall_formula": "(8*0.25 + 6*0.15 + 8*0.25 + 5*0.10 + 7*0.15 + 8*0.10) = 7.3",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = highly saturated, 5 = moderate competition, 10 = blue ocean",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = high demand",
+          "build_complexity": "0 = very hard, 5 = moderate difficulty, 10 = very easy",
+          "monetization_strength": "0 = low revenue potential, 5 = moderate potential, 10 = high potential",
+          "scalability": "0 = not scalable, 5 = moderately scalable, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 8,
+    "learning_note": "I focused on an emerging trend of environmental responsibility in business operations, targeting a high-waste industry with clear regulatory and cost-saving incentives, and ensuring a practical, scalable SaaS solution with strong monetization potential.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-03T10:00:10.000Z"
+  },
+  {
+    "id": 7,
+    "idea_name": "EcoFleet",
+    "product_type": "SaaS",
+    "description": "EcoFleet is a B2B SaaS platform designed for logistics and transportation companies. It leverages AI to optimize route planning and fleet maintenance, reducing fuel consumption and emissions, helping businesses meet sustainability goals while cutting operational costs.",
+    "overall_score": 7.0,
+    "structured_idea": {
+      "idea_name": "EcoFleet",
+      "product_type": "SaaS",
+      "problem_statement": "Logistics and transportation companies face increasing pressure to reduce their carbon footprint while also managing rising fuel and maintenance costs.",
+      "proposed_solution": "EcoFleet uses AI-driven algorithms to optimize route planning and predictive maintenance schedules, minimizing fuel use and reducing emissions. Real-time analytics provide actionable insights for improved sustainability and cost-effectiveness.",
+      "target_users": "Logistics and transportation companies, especially SMBs looking to improve their sustainability and operational efficiency.",
+      "use_case": "A mid-sized freight company uses EcoFleet to analyze and optimize its delivery routes and vehicle maintenance, resulting in a measurable reduction in fuel costs and emissions, fulfilling both economic and regulatory sustainability targets.",
+      "monetization_model": "Subscription-based model with tiered pricing depending on fleet size and additional features like advanced analytics.",
+      "core_value_proposition": "EcoFleet offers a dual benefit of cost savings and sustainability, delivering a compelling solution for logistics firms facing environmental regulations and competitive pressures."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 5,
+      "market_demand": 8,
+      "build_complexity": 6,
+      "monetization_strength": 7,
+      "scalability": 8,
+      "overall_score": 7.0,
+      "scoring_notes": {
+        "viability_score": "The technology is feasible with current AI and analytics capabilities, but requires significant data integration efforts.",
+        "competition_density": "The market has a moderate level of competition with several players offering similar solutions, but differentiation is possible.",
+        "market_demand": "There is a strong demand for solutions that reduce emissions and costs in logistics due to regulatory and economic pressures.",
+        "build_complexity": "Building the core features is moderately complex, requiring expertise in AI and logistics but not insurmountable.",
+        "monetization_strength": "The subscription model is strong given recurring revenue potential, but pricing must be competitive.",
+        "scalability": "The SaaS model allows for good scalability, especially with cloud infrastructure, but requires robust customer support."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Viability is crucial as it determines if the product can realistically be built and used.",
+          "competition_density": "Understanding market saturation helps identify potential for differentiation.",
+          "market_demand": "Demand is critical for adoption and success, hence high weight.",
+          "build_complexity": "Complexity affects time to market and development cost.",
+          "monetization_strength": "Revenue potential is important for business sustainability.",
+          "scalability": "Scalability ensures long-term growth potential."
+        },
+        "overall_formula": "(7*0.25 + 5*0.15 + 8*0.25 + 6*0.10 + 7*0.15 + 8*0.10) = 7.0",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = highly saturated, 5 = moderate competition, 10 = no competition",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = high demand",
+          "build_complexity": "0 = very hard to build, 5 = moderate complexity, 10 = very easy to build",
+          "monetization_strength": "0 = low revenue potential, 5 = moderate potential, 10 = high potential",
+          "scalability": "0 = very limited scalability, 5 = moderate scalability, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 7,
+    "learning_note": "I focused on a high-stakes industry under regulatory pressure with clear demand for sustainability solutions, ensuring strong monetization through a subscription model and leveraging AI to address a tangible pain point in logistics.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-03T06:16:48.000Z"
+  },
+  {
+    "id": 6,
+    "idea_name": "GreenLocust",
+    "product_type": "SaaS",
+    "description": "GreenLocust is an AI-powered SaaS tool that helps small to medium-sized farms optimize crop yields while minimizing environmental impact. By providing real-time analytics on soil health, weather patterns, and pest control, farmers can make data-driven decisions to increase productivity sustainably.",
+    "overall_score": 7.0,
+    "structured_idea": {
+      "idea_name": "GreenLocust",
+      "product_type": "SaaS",
+      "problem_statement": "Farmers struggle to optimize yields while reducing environmental impact due to lack of accessible and affordable data-driven solutions.",
+      "proposed_solution": "An AI-powered platform providing real-time insights on soil health, weather forecast, and pest management to enable sustainable farming practices.",
+      "target_users": "Small to medium-sized farm owners and agricultural consultants.",
+      "use_case": "Farmers receive alerts and recommendations based on real-time data analytics to make informed decisions about crop management.",
+      "monetization_model": "Subscription-based model with tiered pricing based on farm size.",
+      "core_value_proposition": "GreenLocust offers affordable, easy-to-use tools for sustainable farming, increasing productivity and reducing ecological footprint."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 6,
+      "market_demand": 8,
+      "build_complexity": 5,
+      "monetization_strength": 7,
+      "scalability": 8,
+      "overall_score": 7.0,
+      "scoring_notes": {
+        "viability_score": "The concept is viable with current technology, but requires integration of multiple data sources and robust AI algorithms.",
+        "competition_density": "There are existing solutions in the market, but room for differentiation in affordability and ease of use.",
+        "market_demand": "Strong demand for sustainable farming solutions due to increasing environmental concerns and regulatory pressures.",
+        "build_complexity": "Building the platform requires significant effort in data integration and AI development, but is achievable.",
+        "monetization_strength": "Subscription model is promising, especially with tiered pricing, but depends on perceived value by farmers.",
+        "scalability": "High scalability potential due to SaaS nature and growing global need for sustainable agriculture solutions."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Viability is crucial as it determines if the product can realistically be developed and used.",
+          "competition_density": "Competition density affects market entry and differentiation potential.",
+          "market_demand": "Demand is critical for adoption and growth potential.",
+          "build_complexity": "Complexity impacts time to market and resource requirements.",
+          "monetization_strength": "Monetization is key for business sustainability and investor interest.",
+          "scalability": "Scalability determines long-term growth potential and market reach."
+        },
+        "overall_formula": "(7*0.25 + 6*0.15 + 8*0.25 + 5*0.10 + 7*0.15 + 8*0.10) = 7.0",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = saturated market, 5 = moderate competition, 10 = blue ocean",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = high demand",
+          "build_complexity": "0 = very hard to build, 5 = moderate complexity, 10 = very easy to build",
+          "monetization_strength": "0 = poor revenue potential, 5 = moderate potential, 10 = strong potential",
+          "scalability": "0 = very limited scalability, 5 = moderate scalability, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 6,
+    "learning_note": "I focused on the growing demand for sustainable agriculture solutions in an underserved market, leveraging AI for a real-time, subscription-based SaaS offering with clear value and scalability potential.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-03T05:53:24.000Z"
+  },
+  {
+    "id": 5,
+    "idea_name": "HealthSync",
+    "product_type": "SaaS",
+    "description": "HealthSync is a personalized health management platform that leverages AI to provide real-time health insights and recommendations for individuals managing chronic conditions. It empowers users to track symptoms, medications, and lifestyle factors, while seamlessly connecting them with healthcare providers for proactive care.",
+    "overall_score": 6.5,
+    "structured_idea": {
+      "idea_name": "HealthSync",
+      "product_type": "SaaS",
+      "problem_statement": "Individuals with chronic health conditions often struggle to manage their symptoms and medications effectively, leading to diminished quality of life and increased healthcare costs.",
+      "proposed_solution": "HealthSync uses AI-driven analytics to deliver personalized health insights and recommendations. It integrates with wearables and medical devices to track vital stats, symptoms, and medication adherence, providing alerts and insights to users and their healthcare providers.",
+      "target_users": "Individuals with chronic health conditions and healthcare providers",
+      "use_case": "Users can monitor their health in real-time, receive alerts about medication adherence, and share data with their care team for better decision-making.",
+      "monetization_model": "Subscription-based model targeting consumers directly, with potential enterprise licensing for healthcare providers.",
+      "core_value_proposition": "HealthSync improves health outcomes by providing actionable insights for chronic disease management, enhancing patient engagement, and facilitating proactive healthcare."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 4,
+      "market_demand": 8,
+      "build_complexity": 5,
+      "monetization_strength": 6,
+      "scalability": 7,
+      "overall_score": 6.5,
+      "scoring_notes": {
+        "viability_score": "The technology for AI-driven analytics and integration with wearables is feasible but requires significant development.",
+        "competition_density": "The market for health management apps is crowded, but AI-driven personalization offers differentiation.",
+        "market_demand": "Chronic disease management is a significant need, with rising demand for personalized healthcare solutions.",
+        "build_complexity": "Medium complexity due to integration with various devices and the need for robust AI algorithms.",
+        "monetization_strength": "Subscription model is viable, but consumer health apps often face challenges in achieving high conversion rates.",
+        "scalability": "Scalable through cloud-based architecture and potential partnerships with healthcare providers."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Viability is crucial as it determines if the solution can be realistically implemented.",
+          "competition_density": "Understanding market saturation helps gauge the competitive landscape.",
+          "market_demand": "Demand is critical for ensuring there is a customer base willing to use the product.",
+          "build_complexity": "Complexity affects the time and resources needed to bring the product to market.",
+          "monetization_strength": "Revenue potential is key for the business's financial sustainability.",
+          "scalability": "Scalability determines the potential for growth and expansion."
+        },
+        "overall_formula": "(7*0.25 + 4*0.15 + 8*0.25 + 5*0.10 + 6*0.15 + 7*0.10) = 6.5",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = saturated, 5 = moderate competition, 10 = blue ocean",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = high demand",
+          "build_complexity": "0 = very hard, 5 = moderate complexity, 10 = very easy",
+          "monetization_strength": "0 = poor potential, 5 = moderate potential, 10 = high potential",
+          "scalability": "0 = not scalable, 5 = moderately scalable, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 5,
+    "learning_note": "I targeted an underserved niche within the growing healthcare industry, focusing on a tangible problem with real-time data insights for personalized care, building on the successful patterns of addressing urgent needs and leveraging AI.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-03T05:52:39.000Z"
+  },
+  {
+    "id": 4,
+    "idea_name": "CareSync",
+    "product_type": "SaaS",
+    "description": "CareSync streamlines care coordination for families managing elderly healthcare. Offering a centralized platform for scheduling, medication tracking, and communication with caregivers, it alleviates the complexities and stress of elder care management.",
+    "overall_score": 6.7,
+    "structured_idea": {
+      "idea_name": "CareSync",
+      "product_type": "SaaS",
+      "problem_statement": "Families managing elderly care often face stress and inefficiencies due to fragmented communication and lack of centralized information management.",
+      "proposed_solution": "CareSync provides a user-friendly platform to coordinate care schedules, track medications, and facilitate communication among family members and caregivers.",
+      "target_users": "Families managing elderly care, caregivers, and healthcare professionals",
+      "use_case": "Families can easily track medications, schedule appointments, and share updates with caregivers through the app, ensuring better care coordination and reduced stress.",
+      "monetization_model": "Subscription-based model with tiered pricing for additional features and multi-user support.",
+      "core_value_proposition": "By centralizing critical information and communication, CareSync reduces the stress and inefficiencies in managing elder care, delivering peace of mind and improved outcomes."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 4,
+      "market_demand": 8,
+      "build_complexity": 7,
+      "monetization_strength": 6,
+      "scalability": 7,
+      "overall_score": 6.7,
+      "scoring_notes": {
+        "viability_score": "The platform is feasible to build with existing technology and has a clear use case.",
+        "competition_density": "The market is moderately saturated with several existing solutions addressing similar problems.",
+        "market_demand": "There is a strong demand for solutions that ease the burden of elder care management.",
+        "build_complexity": "Developing a SaaS platform is relatively straightforward with current tools and frameworks.",
+        "monetization_strength": "Subscription models are viable, but competition may pressure pricing.",
+        "scalability": "The platform can scale with user growth but may face challenges in integrating with diverse healthcare systems."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Viability is crucial as it determines if the solution can be realistically developed and used.",
+          "competition_density": "Understanding market saturation helps gauge potential for differentiation.",
+          "market_demand": "Demand is critical for adoption and long-term success.",
+          "build_complexity": "Complexity affects time to market and resource requirements.",
+          "monetization_strength": "Revenue potential is key for business sustainability.",
+          "scalability": "Scalability indicates potential for growth and market expansion."
+        },
+        "overall_formula": "(7*0.25 + 4*0.15 + 8*0.25 + 7*0.10 + 6*0.15 + 7*0.10) = 6.7",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = highly saturated market, 5 = moderate competition, 10 = blue ocean market",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = high demand",
+          "build_complexity": "0 = very hard to build, 5 = moderate difficulty, 10 = very easy to build",
+          "monetization_strength": "0 = poor revenue potential, 5 = moderate potential, 10 = high potential",
+          "scalability": "0 = very limited scalability, 5 = moderate scalability, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 4,
+    "learning_note": "I aimed to target a growing and underserved niche of elderly care management, leveraging a clear subscription model and focusing on a real, pressing problem with significant pain points to maximize viability and market demand.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-02T17:41:38.000Z"
+  },
+  {
+    "id": 3,
+    "idea_name": "EcoTrack",
+    "product_type": "SaaS",
+    "description": "EcoTrack is a SaaS platform designed to help small and medium-sized businesses (SMBs) track and improve their sustainability efforts through comprehensive resource and carbon footprint analytics. It provides actionable insights and recommendations to reduce environmental impact, aligning with growing regulatory and consumer demand for sustainable practices.",
+    "overall_score": 7.0,
+    "structured_idea": {
+      "idea_name": "EcoTrack",
+      "product_type": "SaaS",
+      "problem_statement": "SMBs lack the tools and resources to efficiently measure and improve their sustainability metrics, which is increasingly critical in a world with growing environmental regulations and consumer preference for eco-friendly practices.",
+      "proposed_solution": "EcoTrack offers an easy-to-use platform that integrates with existing business systems to automatically gather data on energy consumption, waste generation, and carbon emissions, providing detailed reports and actionable insights to help businesses track and improve their environmental impact.",
+      "target_users": "Small and medium-sized businesses across various industries seeking to improve their sustainability practices.",
+      "use_case": "SMBs integrate EcoTrack with their existing systems to receive automated sustainability reports and actionable steps for improving their eco-friendliness, thus meeting regulatory requirements and appealing to eco-conscious consumers.",
+      "monetization_model": "Subscription-based model with tiered pricing based on business size and level of analytics detail.",
+      "core_value_proposition": "EcoTrack simplifies sustainability management for SMBs, helping them meet regulatory standards, reduce costs, and enhance brand image with minimal effort."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 6,
+      "market_demand": 8,
+      "build_complexity": 5,
+      "monetization_strength": 7,
+      "scalability": 8,
+      "overall_score": 7.0,
+      "scoring_notes": {
+        "viability_score": "The platform is realistically buildable with existing technology and could integrate with current business systems.",
+        "competition_density": "There are some existing players in the sustainability SaaS space, but it's not overly saturated.",
+        "market_demand": "Growing regulatory pressures and consumer preferences indicate a strong need for such solutions.",
+        "build_complexity": "Building the platform requires moderate effort, with challenges in data integration and analytics.",
+        "monetization_strength": "Subscription model is viable, and tiered pricing can capture different segments.",
+        "scalability": "The SaaS model allows for easy scaling across different industries and geographies."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Viability is crucial as the product must be realistically buildable and usable.",
+          "competition_density": "Understanding market saturation helps assess potential market entry challenges.",
+          "market_demand": "Demand is vital to ensure there is a real need for the product.",
+          "build_complexity": "Complexity impacts time to market and development costs.",
+          "monetization_strength": "Revenue potential is important for long-term sustainability.",
+          "scalability": "Scalability indicates growth potential and market reach."
+        },
+        "overall_formula": "(7*0.25 + 6*0.15 + 8*0.25 + 5*0.10 + 7*0.15 + 8*0.10) = 7.0",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = saturated, 5 = moderate competition, 10 = blue ocean",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = high demand",
+          "build_complexity": "0 = very hard, 5 = moderate complexity, 10 = very easy",
+          "monetization_strength": "0 = poor revenue potential, 5 = moderate potential, 10 = high potential",
+          "scalability": "0 = not scalable, 5 = moderately scalable, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 3,
+    "learning_note": "I focused on the increasing regulatory and consumer pressure for sustainable practices, targeting SMBs who need affordable and easy solutions, ensuring strong demand and monetization potential in a less saturated market.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-02T17:38:22.000Z"
+  },
+  {
+    "id": 2,
+    "idea_name": "SkillBridge",
+    "product_type": "SaaS",
+    "description": "SkillBridge connects remote workers with personalized skill enhancement pathways, offering an AI-driven platform that identifies skill gaps and curates targeted learning resources. With a subscription model for companies and freelancers alike, it's designed to boost productivity and job satisfaction in the remote workforce.",
+    "overall_score": 7.0,
+    "structured_idea": {
+      "idea_name": "SkillBridge",
+      "product_type": "SaaS",
+      "problem_statement": "Remote workers often struggle with career growth and skill development due to a lack of personalized guidance and easily accessible resources.",
+      "proposed_solution": "An AI-driven platform that analyzes the user's current skill set, identifies gaps, and curates personalized learning pathways, integrating with popular learning platforms and offering exclusive resources for continuous development.",
+      "target_users": "Remote workers, freelancers, and organizations with remote teams",
+      "use_case": "A freelancer uses SkillBridge to identify skills they can develop to increase their marketability, while a company uses it to ensure their remote team is continuously upskilled and engaged.",
+      "monetization_model": "Subscription-based model for individuals and companies, with tiered pricing based on the number of users and access to premium resources.",
+      "core_value_proposition": "SkillBridge enhances productivity and career advancement by providing personalized, easy-access skill development opportunities, addressing the unique challenges of a growing remote workforce."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 6,
+      "market_demand": 8,
+      "build_complexity": 5,
+      "monetization_strength": 7,
+      "scalability": 8,
+      "overall_score": 7.0,
+      "scoring_notes": {
+        "viability_score": "The concept is viable with current AI and SaaS technologies, though integration with multiple learning platforms could be challenging.",
+        "competition_density": "There are several players in the online learning space, but a niche focus on remote workers provides some differentiation.",
+        "market_demand": "High demand due to the growing number of remote workers seeking skill development and career growth.",
+        "build_complexity": "Building an AI-driven platform with integration capabilities is moderately complex, requiring significant development resources.",
+        "monetization_strength": "Subscription models are proven in SaaS, with potential for strong revenue from both individual and corporate clients.",
+        "scalability": "The SaaS model and digital nature of the product allow for easy scalability across geographies and industries."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "Viability is crucial to determine if the idea can realistically be implemented and used.",
+          "competition_density": "Understanding market saturation helps assess potential market entry challenges.",
+          "market_demand": "Demand is key to ensuring there is a real need and potential user base for the solution.",
+          "build_complexity": "Complexity affects the time and resources needed to bring the product to market.",
+          "monetization_strength": "Revenue potential is vital for the financial success of the business.",
+          "scalability": "Scalability is important for long-term growth and market reach."
+        },
+        "overall_formula": "(7*0.25 + 6*0.15 + 8*0.25 + 5*0.10 + 7*0.15 + 8*0.10) = 7.0",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = highly saturated market, 5 = moderately competitive, 10 = no competition",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = high demand",
+          "build_complexity": "0 = very hard to build, 5 = moderate complexity, 10 = very easy to build",
+          "monetization_strength": "0 = no clear revenue model, 5 = moderate revenue potential, 10 = strong revenue potential",
+          "scalability": "0 = not scalable, 5 = moderately scalable, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 2,
+    "learning_note": "I focused on the rapidly growing remote work trend, leveraging AI for personalization and emphasizing a clear subscription model to meet the scoring criteria.",
+    "status": "approved",
+    "user_comment": "",
+    "created_at": "2026-03-02T16:17:07.000Z"
+  },
+  {
+    "id": 1,
+    "idea_name": "AgingWise",
+    "product_type": "SaaS",
+    "description": "AgingWise is a SaaS platform designed to help adult children manage and coordinate care for their aging parents. It provides tools for medication management, appointment scheduling, and emergency alerts, all integrated within a single app to alleviate the stress of eldercare.",
+    "overall_score": 7.1,
+    "structured_idea": {
+      "idea_name": "AgingWise",
+      "product_type": "SaaS",
+      "problem_statement": "Adult children often struggle to manage the care of their aging parents, juggling medication schedules, appointments, and emergency scenarios, leading to stress and potential health risks.",
+      "proposed_solution": "AgingWise offers a centralized, easy-to-use platform that integrates medication management, appointment coordination, and emergency alert systems to streamline eldercare management.",
+      "target_users": "Adults aged 35-60 who are responsible for the care of elderly parents or relatives.",
+      "use_case": "Users can track medication schedules, receive appointment reminders, and quickly contact emergency services or family members through the app.",
+      "monetization_model": "Subscription-based model with tiered pricing depending on the number of users and additional features like professional caregiver integration.",
+      "core_value_proposition": "By simplifying and centralizing the eldercare process, AgingWise reduces stress and potential health risks, providing peace of mind to families."
+    },
+    "scores": {
+      "viability_score": 7,
+      "competition_density": 6,
+      "market_demand": 8,
+      "build_complexity": 6,
+      "monetization_strength": 7,
+      "scalability": 7,
+      "overall_score": 7.1,
+      "scoring_notes": {
+        "viability_score": "The concept is feasible with current technology and there is a clear use case, but it requires integration with various systems.",
+        "competition_density": "There are existing eldercare management solutions, but the market is not overly saturated.",
+        "market_demand": "The aging population and increasing caregiver responsibilities suggest strong demand for such solutions.",
+        "build_complexity": "Building a platform with these functionalities is moderately complex but achievable with a skilled team.",
+        "monetization_strength": "Subscription model is viable, and tiered pricing can attract diverse user segments.",
+        "scalability": "The platform can scale with the addition of new features and integration with professional caregivers."
+      },
+      "methodology": {
+        "weights": {
+          "viability_score": 25,
+          "competition_density": 15,
+          "market_demand": 25,
+          "build_complexity": 10,
+          "monetization_strength": 15,
+          "scalability": 10
+        },
+        "weight_rationale": {
+          "viability_score": "A high weight is given to viability because the solution must be realistically achievable to succeed.",
+          "competition_density": "Understanding market saturation is crucial to identify opportunities, but not as critical as viability or demand.",
+          "market_demand": "Demand is heavily weighted because a strong need in the market is essential for success.",
+          "build_complexity": "Less weight is given to complexity, as technical challenges can often be overcome with resources.",
+          "monetization_strength": "Monetization is important to ensure the business model is sustainable.",
+          "scalability": "Scalability is key for growth, but initial market entry and demand are more critical."
+        },
+        "overall_formula": "(7*0.25 + 6*0.15 + 8*0.25 + 6*0.10 + 7*0.15 + 7*0.10) = 7.1",
+        "scoring_criteria": {
+          "viability_score": "0 = completely unfeasible, 5 = moderately viable with effort, 10 = highly viable and proven concept",
+          "competition_density": "0 = highly saturated market, 5 = moderate competition, 10 = no competition",
+          "market_demand": "0 = no demand, 5 = moderate demand, 10 = very high demand",
+          "build_complexity": "0 = very hard to build, 5 = moderate complexity, 10 = very easy to build",
+          "monetization_strength": "0 = very weak revenue potential, 5 = moderate potential, 10 = very strong potential",
+          "scalability": "0 = not scalable, 5 = moderate scalability, 10 = highly scalable"
+        }
+      }
+    },
+    "generation_number": 1,
+    "learning_note": "I focused on an underserved niche with a growing demand, combining user-friendly tech with a subscription model to ensure strong monetization potential.",
+    "status": "pending",
+    "user_comment": "",
+    "created_at": "2026-03-02T16:16:44.000Z"
+  }
+]

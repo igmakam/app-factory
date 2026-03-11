@@ -1,0 +1,634 @@
+[
+  {
+    "id": 22,
+    "title": "PetTask Harmony",
+    "description": "PetTask Harmony combines pet care management with household task tracking for seamless family and pet management. This app offers pet feeding schedules and family chore assignments all in one interface, ensuring smooth operations at home.",
+    "source_idea_ids": [
+      40,
+      36
+    ],
+    "source_idea_names": [
+      "PetFeed Tracker",
+      "Family Task Tracker"
+    ],
+    "concept": {
+      "problem": "Families find it challenging to manage both pet care and household chores efficiently, leading to oversight and stress.",
+      "solution": "PetTask Harmony integrates pet feeding schedules with household tasks, using reminders and a reward system to maintain balance and accountability.",
+      "target_users": "Families with multiple pets and children",
+      "product_type": "Tool",
+      "monetization": "Freemium with premium features for personalized schedules and advanced analytics",
+      "unique_angle": "Combining pet care and family task management in one app helps users streamline household and pet responsibilities, reducing stress and improving family harmony.",
+      "estimated_potential": "High potential in busy households where managing pets and chores is essential, with a growing market for integrated lifestyle management tools."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-04T07:54:54.000Z"
+  },
+  {
+    "id": 23,
+    "title": "Millionaire's Auto Navigator",
+    "description": "This platform merges high-profile task delegation with automated travel logistics management, allowing millionaires to coordinate services and travel plans seamlessly.",
+    "source_idea_ids": [
+      38,
+      25
+    ],
+    "source_idea_names": [
+      "Millionaire's Assistant",
+      "AutoVignette"
+    ],
+    "concept": {
+      "problem": "High-net-worth individuals deal with complex service requirements and travel arrangements, wasting time on logistics.",
+      "solution": "Millionaire's Auto Navigator automates service delegation and travel logistics, integrating task management with travel planning to ensure all needs are met efficiently.",
+      "target_users": "Millionaires, busy executives, personal assistants to high-net-worth individuals",
+      "product_type": "Platform",
+      "monetization": "Subscription and commission on arranged services",
+      "unique_angle": "By combining service task management with travel logistics, the platform offers a one-stop solution for high-net-worth individuals, streamlining personal and professional life management.",
+      "estimated_potential": "Strong potential in the luxury services market, where convenience and efficiency are key selling points for affluent customers."
+    },
+    "status": "approved",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-04T07:54:54.000Z"
+  },
+  {
+    "id": 24,
+    "title": "EcoDrive & HabitSwitch: Sustainable Journey",
+    "description": "This tool merges eco-driving guidance with digital habit formation, helping users develop fuel-efficient driving habits while optimizing other personal habits.",
+    "source_idea_ids": [
+      26,
+      33
+    ],
+    "source_idea_names": [
+      "EcoDrive Advisor",
+      "HabitSwitch"
+    ],
+    "concept": {
+      "problem": "Drivers often struggle to maintain fuel-efficient driving habits and balance digital distractions, impacting productivity and sustainability.",
+      "solution": "The app provides real-time eco-driving feedback and habit tracking, encouraging users to adopt better driving behaviors and manage digital habits for improved efficiency.",
+      "target_users": "Professional drivers, commuters, eco-conscious individuals",
+      "product_type": "Tool",
+      "monetization": "Subscription with additional rewards for achieving milestones",
+      "unique_angle": "Integrating eco-driving with habit formation solutions addresses both environmental and personal productivity challenges, creating a comprehensive lifestyle improvement tool.",
+      "estimated_potential": "High potential among eco-conscious consumers and those seeking to improve personal efficiency, tapping into the growing market for sustainable and self-improvement tools."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-04T07:54:54.000Z"
+  },
+  {
+    "id": 19,
+    "title": "AI Insight Orchestrator",
+    "description": "AI Insight Orchestrator combines AI-driven workflow management with real-time trend tracking to help marketing professionals and businesses optimize their strategies. It enables users to create automated workflows while staying updated on the latest market trends.",
+    "source_idea_ids": [
+      23,
+      22,
+      2
+    ],
+    "source_idea_names": [
+      "AI Orchestrator",
+      "AI Workflow Master",
+      "TrendTracker Scraper"
+    ],
+    "concept": {
+      "problem": "Marketing professionals struggle to manage fragmented AI tools while also needing to keep up with rapidly changing market trends.",
+      "solution": "AI Insight Orchestrator integrates various AI tools into a single platform and enhances them with real-time trend analysis to provide seamless workflows and actionable market insights.",
+      "target_users": "Digital marketers, business strategists, market analysts, advertising agencies",
+      "product_type": "Platform",
+      "monetization": "Subscription",
+      "unique_angle": "Combining seamless AI workflow automation with critical market trend insights creates a powerful tool that not only optimizes internal processes but also aligns them with external market dynamics.",
+      "estimated_potential": "With the increasing reliance on AI for marketing and the crucial importance of staying ahead in fast-changing markets, this product has significant potential to attract a wide range of marketing professionals and agencies."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T16:57:59.000Z"
+  },
+  {
+    "id": 20,
+    "title": "InfluenceSmart Navigator",
+    "description": "InfluenceSmart Navigator empowers small businesses and influencers by providing financial insights, influencer connections, and personalized apps for brand engagement and growth.",
+    "source_idea_ids": [
+      16,
+      7,
+      6
+    ],
+    "source_idea_names": [
+      "FinScore: Digital Banking Advisor",
+      "InfluenceConnect",
+      "InfluenceConnect"
+    ],
+    "concept": {
+      "problem": "Small businesses and influencers face challenges in securing financing and effectively connecting with their audience.",
+      "solution": "This platform offers financial scoring and advice, connects influencers with business opportunities, and enables them to develop personalized apps for direct audience engagement.",
+      "target_users": "Small businesses, influencers, financial advisors, content creators",
+      "product_type": "Platform",
+      "monetization": "Revenue sharing model and subscription",
+      "unique_angle": "By integrating financial advisory services with influencer marketing and app development, this platform provides a comprehensive solution for growth and monetization.",
+      "estimated_potential": "Given the growing demand for influencer collaborations and the need for financial stability in small businesses, this platform can significantly impact both domains by offering innovative, integrated solutions."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T16:57:59.000Z"
+  },
+  {
+    "id": 21,
+    "title": "EuroValue Tracker",
+    "description": "EuroValue Tracker helps SMEs and automotive industry players in Europe monitor EU funding opportunities and vehicle market trends to leverage financial growth and market positioning.",
+    "source_idea_ids": [
+      19,
+      17
+    ],
+    "source_idea_names": [
+      "EuroFund Scanner",
+      "AutoValueTracker"
+    ],
+    "concept": {
+      "problem": "European SMEs struggle to access EU funds while also needing to stay updated on vehicle market trends for strategic decision-making.",
+      "solution": "The platform offers automated EU fund scanning and real-time vehicle market analysis, providing businesses with valuable financial opportunities and market insights.",
+      "target_users": "European SMEs, automotive industry players, fleet management companies",
+      "product_type": "Platform",
+      "monetization": "Commission-based from successful fund approvals and subscription for market data access",
+      "unique_angle": "Combining access to EU funds with vehicle market insights provides a unique platform that supports businesses in enhancing financial growth and market competitiveness.",
+      "estimated_potential": "With the European focus on supporting SMEs and the dynamic automotive market, this platform offers a robust solution with significant market appeal and growth potential."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T16:57:59.000Z"
+  },
+  {
+    "id": 16,
+    "title": "InfluenceDriven AI",
+    "description": "InfluenceDriven AI combines influencer matchmaking with AI workflow automation to streamline influencer campaigns. Brands can automate campaign management while matching with the right influencers based on data-driven insights.",
+    "source_idea_ids": [
+      7,
+      22
+    ],
+    "source_idea_names": [
+      "InfluenceConnect",
+      "AI Workflow Master"
+    ],
+    "concept": {
+      "problem": "Brands struggle with efficiently managing influencer campaigns and ensuring they connect with the right influencers for their niche.",
+      "solution": "A platform that uses AI to automate campaign workflows and seamlessly matches brands with influencers suited to their specific needs.",
+      "target_users": "Brands, marketing agencies, influencers",
+      "product_type": "Platform",
+      "monetization": "Commission and subscription model for premium features",
+      "unique_angle": "By integrating AI-driven workflows with influencer matchmaking, brands can save time and improve the effectiveness of their campaigns.",
+      "estimated_potential": "With the influencer marketing industry booming, a tool that automates and optimizes every aspect of the influencer-brand collaboration can capture a large share of the market."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T16:54:24.000Z"
+  },
+  {
+    "id": 17,
+    "title": "AppLaunch Navigator",
+    "description": "AppLaunch Navigator merges app critique with launch success tracking to provide developers with a holistic tool for app improvement and successful launch execution.",
+    "source_idea_ids": [
+      21,
+      5
+    ],
+    "source_idea_names": [
+      "AppCritique AI",
+      "LaunchSuccess Tracker"
+    ],
+    "concept": {
+      "problem": "Developers need a streamlined way to receive feedback on their apps and ensure a successful launch.",
+      "solution": "A comprehensive tool that evaluates apps for improvements and provides a structured checklist for a successful launch.",
+      "target_users": "App developers, project managers, tech entrepreneurs",
+      "product_type": "SaaS",
+      "monetization": "Subscription with premium analytics",
+      "unique_angle": "The combination of critique and launch planning ensures developers not only improve their apps but also optimize for a successful market entry.",
+      "estimated_potential": "As the app development market continues to grow, a tool that addresses both app quality and successful launches is poised for substantial market adoption."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T16:54:24.000Z"
+  },
+  {
+    "id": 18,
+    "title": "TrendFund AI",
+    "description": "TrendFund AI combines real-time e-commerce trend tracking with EU fund navigation to help businesses identify and leverage new market opportunities while securing necessary funding.",
+    "source_idea_ids": [
+      2,
+      19
+    ],
+    "source_idea_names": [
+      "TrendTracker Scraper",
+      "EuroFund Scanner"
+    ],
+    "concept": {
+      "problem": "Businesses struggle to keep up with market trends and secure funding to capitalize on new opportunities.",
+      "solution": "An integrated platform that identifies trending products and matches businesses with relevant EU funds to support their strategic initiatives.",
+      "target_users": "SMEs, startups, market analysts",
+      "product_type": "Platform",
+      "monetization": "Subscription and commission on successful fund applications",
+      "unique_angle": "By connecting market trend insights with funding opportunities, businesses are empowered to act on insights with the financial backing needed for execution.",
+      "estimated_potential": "The dual approach of market intelligence and funding access can significantly enhance a business's ability to innovate and capture market share."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T16:54:24.000Z"
+  },
+  {
+    "id": 13,
+    "title": "LeverageLandLink",
+    "description": "LeverageLandLink is a powerful platform that combines leverage identification with land asset optimization, offering landowners insights into maximizing property potential through strategic leverage opportunities.",
+    "source_idea_ids": [
+      10,
+      9
+    ],
+    "source_idea_names": [
+      "LeverageMaster",
+      "LandLink: The Property Owner Network"
+    ],
+    "concept": {
+      "problem": "Landowners struggle to identify leverage points within their property assets to maximize value and potential development opportunities.",
+      "solution": "The platform provides educational insights into leverage strategies combined with data-driven property analysis, allowing landowners to unlock new opportunities for property development and sales.",
+      "target_users": "Landowners, real estate developers, property investors, and business strategists",
+      "product_type": "Platform",
+      "monetization": "Subscription and commission on property deals",
+      "unique_angle": "By merging leverage strategy education with property data insights, this platform uniquely empowers landowners to maximize property value through strategic leverage.",
+      "estimated_potential": "The real estate industry is vast, and with growing interest in data-driven property management, this platform can capture a significant niche in optimizing land asset utilization."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T11:59:17.000Z"
+  },
+  {
+    "id": 14,
+    "title": "InfluenceTrend Tracker",
+    "description": "InfluenceTrend Tracker helps influencers and brands stay ahead of market trends by providing real-time insights into emerging product opportunities and niche-specific collaborations.",
+    "source_idea_ids": [
+      6,
+      2
+    ],
+    "source_idea_names": [
+      "InfluenceConnect",
+      "TrendTracker Scraper"
+    ],
+    "concept": {
+      "problem": "Influencers and brands struggle to identify trending products and niche-specific opportunities in a fast-paced market.",
+      "solution": "The tool combines influencer-specific insights with trend tracking capabilities, offering tailored product opportunities and niche collaborations based on real-time market analysis.",
+      "target_users": "Influencers, brands, marketers, and e-commerce businesses",
+      "product_type": "Tool",
+      "monetization": "Subscription and commission on successful collaborations",
+      "unique_angle": "This hybrid product fills a gap by marrying influencer marketing with trend analytics, offering a comprehensive approach to market engagement and monetization.",
+      "estimated_potential": "With the growing reliance on influencer marketing and the need for real-time trend data, InfluenceTrend Tracker offers significant value for both influencers and brands looking to stay competitive."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T11:59:17.000Z"
+  },
+  {
+    "id": 15,
+    "title": "LaunchMaster Connect",
+    "description": "LaunchMaster Connect is a strategic tool that combines successful launch tracking with influencer engagement, ensuring comprehensive support for product and project launches.",
+    "source_idea_ids": [
+      5,
+      4
+    ],
+    "source_idea_names": [
+      "LaunchSuccess Tracker",
+      "Influencer Insight Hub"
+    ],
+    "concept": {
+      "problem": "Successful launches require both strategic planning and effective marketing collaboration, which many businesses find challenging to integrate.",
+      "solution": "The tool offers data-driven launch checklists alongside influencer collaboration insights, streamlining the launch process with both internal and external strategic support.",
+      "target_users": "App developers, project managers, marketers, and product managers",
+      "product_type": "Platform",
+      "monetization": "Subscription and commission on influencer partnerships",
+      "unique_angle": "By integrating launch strategy with influencer marketing, this platform uniquely supports both the technical and promotional sides of a successful launch.",
+      "estimated_potential": "Given the importance of integrated launch strategies, this tool has strong potential to become an essential resource for businesses looking to optimize both product development and marketing efforts."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T11:59:17.000Z"
+  },
+  {
+    "id": 10,
+    "title": "LeverageInsight Hub",
+    "description": "LeverageInsight Hub is a platform combining the power of data-driven leverage strategies and influencer insights. It offers businesses a way to discover optimal leverage points while also connecting with influencers for targeted marketing, enhancing both productivity and market reach.",
+    "source_idea_ids": [
+      10,
+      4
+    ],
+    "source_idea_names": [
+      "LeverageMaster",
+      "Influencer Insight Hub"
+    ],
+    "concept": {
+      "problem": "Businesses struggle to identify leverage points and efficiently engage with influencers for marketing, limiting both operational effectiveness and market visibility.",
+      "solution": "By integrating leverage strategy identification with influencer insights, businesses are equipped with a dual approach to optimize operations and marketing through strategic influencer partnerships.",
+      "target_users": "Entrepreneurs, business owners, marketers, and agencies",
+      "product_type": "Platform",
+      "monetization": "Subscription and commission-based model from influencer collaborations",
+      "unique_angle": "Combining leverage strategy insights with influencer marketing creates a potent tool for businesses to enhance internal efficiency while expanding external market reach.",
+      "estimated_potential": "High potential in industries that are rapidly adopting digital transformation and influencer marketing."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T06:16:26.000Z"
+  },
+  {
+    "id": 11,
+    "title": "LaunchMaster Tracker",
+    "description": "LaunchMaster Tracker is a comprehensive tool that combines launch success insights with leverage identification, offering businesses data-driven strategies for both successful project launches and optimizing existing operations.",
+    "source_idea_ids": [
+      10,
+      5
+    ],
+    "source_idea_names": [
+      "LeverageMaster",
+      "LaunchSuccess Tracker"
+    ],
+    "concept": {
+      "problem": "Many businesses struggle with successful project launches and cannot identify critical leverage points to enhance ongoing operations.",
+      "solution": "By merging insights on successful launches with leverage strategy identification, this tool provides a holistic approach to both launch planning and operational optimization.",
+      "target_users": "Project managers, entrepreneurs, app developers, business consultants",
+      "product_type": "Tool",
+      "monetization": "Subscription",
+      "unique_angle": "The combination of launch insights with leverage strategies offers a unique dual advantage, ensuring both effective launches and ongoing operational enhancement.",
+      "estimated_potential": "Strong demand in technology and startup sectors where efficient project launches and operations are critical."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T06:16:26.000Z"
+  },
+  {
+    "id": 12,
+    "title": "TrendLeverage Connect",
+    "description": "TrendLeverage Connect is a tool that merges real-time trend tracking with leverage identification, enabling businesses to detect e-commerce trends and leverage them for strategic advantage.",
+    "source_idea_ids": [
+      10,
+      2
+    ],
+    "source_idea_names": [
+      "LeverageMaster",
+      "TrendTracker Scraper"
+    ],
+    "concept": {
+      "problem": "Businesses often miss out on emerging trends and fail to leverage them effectively for strategic growth.",
+      "solution": "This tool provides real-time trend insights alongside leverage strategies, allowing businesses to capitalize on market trends efficiently.",
+      "target_users": "E-commerce businesses, market analysts, business strategists",
+      "product_type": "Tool",
+      "monetization": "Subscription",
+      "unique_angle": "Integrating trend tracking with leverage opportunities gives businesses a robust method to not only identify trends but also strategically exploit them for growth.",
+      "estimated_potential": "High potential in the dynamic e-commerce sector where market trends and leverage strategies can significantly impact business success."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T06:16:26.000Z"
+  },
+  {
+    "id": 7,
+    "title": "InfluenceMaster Connect",
+    "description": "InfluenceMaster Connect combines influencer and business leverage strategies into a unified platform. It empowers influencers to identify and maximize leverage opportunities while connecting them with businesses seeking targeted influencer marketing partnerships.",
+    "source_idea_ids": [
+      10,
+      7,
+      6
+    ],
+    "source_idea_names": [
+      "LeverageMaster",
+      "InfluenceConnect",
+      "InfluenceConnect"
+    ],
+    "concept": {
+      "problem": "Influencers often lack the strategic insights to leverage their brand fully, and businesses struggle to find suitable influencers for niche marketing.",
+      "solution": "The platform educates influencers on leverage strategies to enhance their brand value while providing a matchmaking service for businesses to find influencers aligned with their brand goals.",
+      "target_users": "Influencers, content creators, businesses seeking influencer partnerships",
+      "product_type": "Platform",
+      "monetization": "Subscription for influencers and commission on successful collaborations",
+      "unique_angle": "By merging leverage strategies with influencer matchmaking, this platform provides a dual benefit structure that enhances influencer brand value and facilitates precise business-influencer partnerships.",
+      "estimated_potential": "With the influencer marketing industry booming, this platform has significant potential to capture a substantial market share by addressing prominent pain points in influencer-brand collaborations."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T05:53:12.000Z"
+  },
+  {
+    "id": 8,
+    "title": "TrendLink Property Insights",
+    "description": "TrendLink Property Insights integrates land ownership data analysis with market trend forecasting, enabling property owners to identify the most lucrative development opportunities based on current market demands.",
+    "source_idea_ids": [
+      9,
+      2
+    ],
+    "source_idea_names": [
+      "LandLink: The Property Owner Network",
+      "TrendTracker Scraper"
+    ],
+    "concept": {
+      "problem": "Landowners miss out on potential development opportunities by not aligning their property utilization with current market demands.",
+      "solution": "The platform offers data-driven insights into land development opportunities by merging ownership data with real-time market trends, guiding landowners in making informed decisions.",
+      "target_users": "Landowners, real estate developers, property investors",
+      "product_type": "Platform",
+      "monetization": "Subscription and commission on successful development initiatives",
+      "unique_angle": "Combining land data with market trend analytics offers a unique proposition that maximizes property value through strategic, data-informed decisions.",
+      "estimated_potential": "The real estate market's growth and the demand for data-driven decision-making present a substantial opportunity for this platform to become an invaluable tool for property owners and developers."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T05:53:12.000Z"
+  },
+  {
+    "id": 9,
+    "title": "LaunchMaster Tracker",
+    "description": "LaunchMaster Tracker leverages the structured insights of successful product launches with trend analysis to provide businesses with optimized, data-driven strategies for new product debuts.",
+    "source_idea_ids": [
+      5,
+      2
+    ],
+    "source_idea_names": [
+      "LaunchSuccess Tracker",
+      "TrendTracker Scraper"
+    ],
+    "concept": {
+      "problem": "Businesses struggle to launch products effectively without a comprehensive understanding of past successes and current market trends.",
+      "solution": "The tool combines launch checklists with real-time trend analysis, offering a holistic approach to planning and executing successful product launches.",
+      "target_users": "App developers, project managers, product managers, marketing teams",
+      "product_type": "Tool",
+      "monetization": "Subscription",
+      "unique_angle": "By integrating historical launch data with current market trend analysis, this tool offers a unique, forward-looking approach to product launch planning.",
+      "estimated_potential": "As businesses continue to innovate, the demand for effective launch strategies is high, positioning this tool to capture a significant market segment seeking data-driven launch solutions."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T05:53:12.000Z"
+  },
+  {
+    "id": 4,
+    "title": "InfluenceLeverage Hub",
+    "description": "InfluenceLeverage Hub is a platform that combines influencer marketing insights with strategic business leverage opportunities. It enables businesses to identify key influencers and optimal leverage points to enhance marketing efforts and drive profitability.",
+    "source_idea_ids": [
+      10,
+      6,
+      4
+    ],
+    "source_idea_names": [
+      "LeverageMaster",
+      "InfluenceConnect",
+      "Influencer Insight Hub"
+    ],
+    "concept": {
+      "problem": "Businesses struggle to identify both the right influencers and strategic leverage points to maximize their marketing ROI.",
+      "solution": "The platform offers a dual approach by analyzing influencer niches alongside business leverage opportunities, providing actionable strategies to enhance marketing effectiveness and business growth.",
+      "target_users": "Brands, marketers, influencers, and business managers",
+      "product_type": "Platform",
+      "monetization": "Subscription and commission from successful influencer collaborations",
+      "unique_angle": "By integrating influencer insights with leverage strategies, the platform amplifies marketing success, offering businesses a comprehensive tool to maximize their investments.",
+      "estimated_potential": "High market potential as businesses increasingly seek to optimize marketing strategies through both influencer partnerships and strategic leverage points."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T05:52:51.000Z"
+  },
+  {
+    "id": 5,
+    "title": "LandLink Tracker",
+    "description": "LandLink Tracker is a tool that combines real estate insights with e-commerce trend data to offer landowners and developers a strategic edge in property development and investment.",
+    "source_idea_ids": [
+      9,
+      2
+    ],
+    "source_idea_names": [
+      "LandLink: The Property Owner Network",
+      "TrendTracker Scraper"
+    ],
+    "concept": {
+      "problem": "Landowners and developers lack comprehensive insights into both property opportunities and emerging market trends, hindering strategic development decisions.",
+      "solution": "The tool aggregates land ownership data with real-time market trends, offering strategic insights for property enhancements and e-commerce integration.",
+      "target_users": "Landowners, real estate developers, property investors",
+      "product_type": "Tool",
+      "monetization": "Subscription and commission on successful developments or sales",
+      "unique_angle": "By merging property data with e-commerce trends, the tool provides a unique perspective for maximizing land value and identifying innovative development opportunities.",
+      "estimated_potential": "Strong potential as it addresses the increasing need for data-driven property decision-making in a rapidly evolving market landscape."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T05:52:51.000Z"
+  },
+  {
+    "id": 6,
+    "title": "LaunchConnect Pro",
+    "description": "LaunchConnect Pro is a platform that merges comprehensive launch planning tools with influencer-driven marketing strategies, ensuring successful product launches with maximum market impact.",
+    "source_idea_ids": [
+      5,
+      6
+    ],
+    "source_idea_names": [
+      "LaunchSuccess Tracker",
+      "InfluenceConnect"
+    ],
+    "concept": {
+      "problem": "Project managers and marketers often struggle to synchronize technical launch planning with effective influencer marketing strategies.",
+      "solution": "The platform offers integrated tools that streamline launch planning while connecting businesses with key influencers for coordinated marketing efforts.",
+      "target_users": "App developers, project managers, marketers, influencers",
+      "product_type": "Platform",
+      "monetization": "Subscription and commission from influencer collaborations",
+      "unique_angle": "Combining structured launch tools with influencer marketing creates a cohesive approach to launching products with wide-reaching impact and consumer engagement.",
+      "estimated_potential": "High potential given the growing reliance on influencer marketing and the need for structured launch strategies in competitive markets."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-03T05:52:51.000Z"
+  },
+  {
+    "id": 1,
+    "title": "LaunchTrend Navigator",
+    "description": "LaunchTrend Navigator combines AI-powered competitive analysis with real-time e-commerce trend insights to guide businesses in launching successful products and services. It provides data-driven checklists, market insights, and competitive intelligence tailored for unique launch scenarios.",
+    "source_idea_ids": [
+      5,
+      2
+    ],
+    "source_idea_names": [
+      "LaunchSuccess Tracker",
+      "TrendTracker Scraper"
+    ],
+    "concept": {
+      "problem": "Businesses struggle with planning successful launches due to lack of structured insights, timely market trends, and competitive intelligence.",
+      "solution": "Offers a comprehensive approach by integrating AI-driven competitive analysis with launch checklists and relevant e-commerce trends, empowering businesses to strategize effectively for successful launches.",
+      "target_users": "Product managers, business strategists, e-commerce businesses",
+      "product_type": "SaaS",
+      "monetization": "Subscription",
+      "unique_angle": "Combines AI-powered competitive analysis with launch planning and real-time market trends, creating a robust tool for strategic launch success.",
+      "estimated_potential": "High potential in the growing e-commerce and digital product markets, where competitive insights and timely launches can significantly impact success."
+    },
+    "status": "approved",
+    "user_comment": "",
+    "ai_revision": "Incorporated AI-powered competitive analysis to address user's feedback and enhance the tool's strategic capabilities.",
+    "created_at": "2026-03-02T13:57:37.000Z"
+  },
+  {
+    "id": 2,
+    "title": "InfluenceTrend Analyzer",
+    "description": "InfluenceTrend Analyzer is a platform that merges influencer insights with trend analysis, enabling brands to not only find the right influencers but also align with the latest market trends for maximum impact.",
+    "source_idea_ids": [
+      4,
+      2
+    ],
+    "source_idea_names": [
+      "Influencer Insight Hub",
+      "TrendTracker Scraper"
+    ],
+    "concept": {
+      "problem": "Brands need to align their influencer marketing campaigns with current market trends to maximize engagement and ROI.",
+      "solution": "Combines influencer discovery and trend analysis, allowing brands to choose influencers who are most aligned with current high-demand products and emerging trends.",
+      "target_users": "Brands, marketers, e-commerce businesses",
+      "product_type": "Platform",
+      "monetization": "Commission-based and subscription",
+      "unique_angle": "Enhances influencer marketing strategies by providing trend insights, making campaigns more timely and relevant.",
+      "estimated_potential": "Strong market potential as influencer marketing continues to grow, with brands seeking more data-driven approaches."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-02T13:57:37.000Z"
+  },
+  {
+    "id": 3,
+    "title": "LaunchInfluence Connect",
+    "description": "LaunchInfluence Connect offers a comprehensive platform that integrates influencer collaboration with launch success tracking, providing brands a structured way to leverage influencer marketing for successful product launches.",
+    "source_idea_ids": [
+      4,
+      5
+    ],
+    "source_idea_names": [
+      "Influencer Insight Hub",
+      "LaunchSuccess Tracker"
+    ],
+    "concept": {
+      "problem": "Brands often miss the mark in launching products effectively due to fragmented approaches to influencer marketing and launch execution.",
+      "solution": "Combines influencer engagement tools with launch checklists and insights to streamline and enhance the effectiveness of product launches.",
+      "target_users": "Brands, product managers, marketing agencies",
+      "product_type": "Platform",
+      "monetization": "Subscription and commission-based",
+      "unique_angle": "Bridges the gap between influencer marketing and launch execution, providing a holistic approach to product launches.",
+      "estimated_potential": "High potential as businesses increasingly rely on influencers for launch campaigns, demanding integrated solutions."
+    },
+    "status": "pending",
+    "user_comment": "",
+    "ai_revision": "",
+    "created_at": "2026-03-02T13:57:37.000Z"
+  }
+]
