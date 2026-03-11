@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from app.database import get_db, init_db, DATABASE_PATH
+from app.database import get_db, init_db, DATABASE_URL as DATABASE_PATH
 from app.auth import hash_password, verify_password, create_access_token, get_current_user, create_guest_token, decode_guest_token, GUEST_LINK_EXPIRE_HOURS
 from app.models import (
     UserRegister, UserLogin, TokenResponse, UserResponse,
@@ -21,7 +21,7 @@ from app.models import (
     DashboardResponse, SettingUpdate
 )
 from app.ai_engine import get_questionnaire_questions, generate_store_listing, generate_localization, generate_additional_growth_ideas, generate_launch_strategy, generate_campaign_content, analyze_setup_feedback
-from app.pipeline import create_pipeline_run, get_pipeline_run, get_latest_pipeline_run, run_pipeline, PIPELINE_STEPS, pipeline_monitor_task
+from app.pipeline import create_pipeline_run, get_pipeline_run, get_latest_pipeline_run, run_pipeline, PIPELINE_STEPS
 from app.store_api import create_apple_client, create_google_client
 import asyncio
 import logging
@@ -32,16 +32,9 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
-    # Start background pipeline monitor
-    monitor = asyncio.create_task(pipeline_monitor_task(DATABASE_PATH))
-    logger.info("Background pipeline monitor started")
+    logger.info("Database initialized")
     yield
-    monitor.cancel()
-    try:
-        await monitor
-    except asyncio.CancelledError:
-        pass
-    logger.info("Background pipeline monitor stopped")
+    logger.info("Shutdown")
 
 app = FastAPI(title="Auto Launch API", lifespan=lifespan)
 
