@@ -75,6 +75,18 @@ services:
     command: python -m orchestrator.main --worker
     restart: unless-stopped
 
+  # Telegram Bot
+  telegram-bot:
+    build: .
+    depends_on:
+      - orchestrator
+    environment:
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+      ORCHESTRATOR_URL: http://orchestrator:8000
+    command: python -m telegram_bot.bot
+    restart: unless-stopped
+
   # Prometheus
   prometheus:
     image: prom/prometheus:v2.55.0
