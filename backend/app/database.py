@@ -141,11 +141,16 @@ class RealDB:
 
     async def execute(self, sql: str, args=()):
         sql_pg = _convert_sql(sql)
-        # INSERT → pridaj RETURNING id
-        if sql_pg.strip().upper().startswith("INSERT") and "RETURNING" not in sql_pg.upper():
+        stripped = sql_pg.strip().upper()
+
+        if stripped.startswith("INSERT") and "RETURNING" not in stripped:
             sql_pg = sql_pg.rstrip(";") + " RETURNING id"
             rid = await self._conn.fetchval(sql_pg, *args)
             return _FakeCursor(rid)
+        elif stripped.startswith("SELECT"):
+            rows = await self._conn.fetch(sql_pg, *args)
+            fake_rows = [FakeRow(dict(r)) for r in rows]
+            return _FakeCursor(None, fake_rows)
         else:
             await self._conn.execute(sql_pg, *args)
             return _FakeCursor(None)
@@ -170,11 +175,15 @@ class RealDB:
 
 
 class _FakeCursor:
-    def __init__(self, lastrowid):
+    def __init__(self, lastrowid, rows=None):
         self.lastrowid = lastrowid
+        self._rows = rows or []
 
     async def fetchone(self):
-        return None
+        return self._rows[0] if self._rows else None
+
+    async def fetchall(self):
+        return self._rows
 
 
 def _convert_sql(sql: str) -> str:
