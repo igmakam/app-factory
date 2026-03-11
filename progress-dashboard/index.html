@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App Factory — Denný prehľad</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #e0e0e0;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+    .day-group { margin-bottom: 48px; }
+    .day-header {
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .entry {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .entry:last-child { border-bottom: none; }
+    .time {
+      font-size: 12px;
+      color: #555;
+      min-width: 48px;
+      padding-top: 2px;
+    }
+    .content { flex: 1; }
+    .title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .desc {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.5;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .tag-done { background: #1a3a1a; color: #4caf50; }
+    .tag-infra { background: #1a2a3a; color: #64b5f6; }
+    .tag-fix { background: #3a2a1a; color: #ffb74d; }
+    .empty {
+      text-align: center;
+      color: #333;
+      padding: 60px 0;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>App Factory</h1>
+    <p class="subtitle">Denný prehľad dokončených vecí</p>
+    <div id="log-container"><div class="empty">Načítavam...</div></div>
+  </div>
+  <script>
+    async function load() {
+      try {
+        const res = await fetch('log.json?v=' + Date.now());
+        const data = await res.json();
+        render(data);
+      } catch(e) {
+        document.getElementById('log-container').innerHTML =
+          '<div class="empty">Žiadne záznamy ešte.</div>';
+      }
+    }
+
+    function render(entries) {
+      if (!entries || entries.length === 0) {
+        document.getElementById('log-container').innerHTML =
+          '<div class="empty">Žiadne záznamy ešte.</div>';
+        return;
+      }
+
+      // Zoskup podľa dňa
+      const days = {};
+      for (const e of entries) {
+        const d = e.date || e.datetime?.split('T')[0] || 'Neznámy dátum';
+        if (!days[d]) days[d] = [];
+        days[d].push(e);
+      }
+
+      const keys = Object.keys(days).sort().reverse();
+      let html = '';
+      for (const day of keys) {
+        const label = formatDay(day);
+        html += `<div class="day-group"><div class="day-header">${label}</div>`;
+        for (const e of days[day]) {
+          const tagHtml = e.tag ? `<span class="tag tag-${e.tag}">${tagLabel(e.tag)}</span>` : '';
+          html += `
+            <div class="entry">
+              <div class="time">${e.time || ''}</div>
+              <div class="content">
+                <div class="title">${e.title}${tagHtml}</div>
+                ${e.desc ? `<div class="desc">${e.desc}</div>` : ''}
+              </div>
+            </div>`;
+        }
+        html += '</div>';
+      }
+      document.getElementById('log-container').innerHTML = html;
+    }
+
+    function formatDay(d) {
+      try {
+        const date = new Date(d);
+        return date.toLocaleDateString('sk-SK', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      } catch { return d; }
+    }
+
+    function tagLabel(t) {
+      return { done: '✓ Hotovo', infra: '⚙ Infraštruktúra', fix: '🔧 Oprava' }[t] || t;
+    }
+
+    load();
+  </script>
+</body>
+</html>

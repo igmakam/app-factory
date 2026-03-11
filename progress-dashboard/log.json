@@ -1,0 +1,37 @@
+[
+  {
+    "date": "2026-03-11",
+    "time": "12:00",
+    "title": "Mac Mini M4 nastavený",
+    "desc": "Homebrew, Python 3.12, Ruby, Fastlane nainštalované. Repo naklonovný. Mac je pripravený na iOS buildy.",
+    "tag": "infra"
+  },
+  {
+    "date": "2026-03-11",
+    "time": "12:45",
+    "title": "SSH prístup na Mac Mini",
+    "desc": "Tailscale VPN nastavený — môžem priamo ovládať Mac Mini z cloudu bez manuálnych zásahov.",
+    "tag": "infra"
+  },
+  {
+    "date": "2026-03-11",
+    "time": "11:00",
+    "title": "Dashboard spustený",
+    "desc": "Live na dashboard-makam.vercel.app — pripojený na existujúci Autolauncher backend. Login funguje.",
+    "tag": "done"
+  },
+  {
+    "date": "2026-03-11",
+    "time": "10:00",
+    "title": "GitHub repo app-factory vytvorený",
+    "desc": "Nový repozitár igmakam/app-factory s kompletnou štruktúrou backendu, workflowov a Temporal aktivít.",
+    "tag": "done"
+  },
+  {
+    "date": "2026-03-11",
+    "time": "09:00",
+    "title": "Audit Autolauncher dokončený",
+    "desc": "Zdrojový kód preskúmaný — SQLite, FastAPI, hardcoded credentials. Migrovaný na PostgreSQL + env vars.",
+    "tag": "done"
+  }
+]
