@@ -129,7 +129,7 @@ async def register(user: UserRegister, db: aiosqlite.Connection = Depends(get_db
             email=user.email,
             full_name=user.full_name,
             avatar_url="",
-            created_at=datetime.now(timezone.utc).isoformat()
+            created_at=datetime.now(timezone.utc)
         )
     )
 
@@ -147,7 +147,7 @@ async def login(user: UserLogin, db: aiosqlite.Connection = Depends(get_db)):
 
     await db.execute(
         "UPDATE users SET last_login = ? WHERE id = ?",
-        (datetime.now(timezone.utc).isoformat(), db_user["id"])
+        (datetime.now(timezone.utc), db_user["id"])
     )
     await db.commit()
 
@@ -194,7 +194,7 @@ async def save_credential(
     db: aiosqlite.Connection = Depends(get_db)
 ):
     user_id = int(current_user["sub"])
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
     cred_json = json.dumps(cred.credential_data)
 
     await db.execute(
@@ -257,7 +257,7 @@ async def validate_credential(
         has_all = all(cred_data.get(k) for k in required)
         result = {"valid": has_all, "message": "All required fields present" if has_all else "Missing required fields"}
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
     await db.execute(
         "UPDATE credentials SET is_valid = ?, validated_at = ? WHERE user_id = ? AND credential_type = ?",
         (1 if result.get("valid") else 0, now, user_id, credential_type)
@@ -309,7 +309,7 @@ async def create_project(
     db: aiosqlite.Connection = Depends(get_db)
 ):
     user_id = int(current_user["sub"])
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
     cursor = await db.execute(
         "INSERT INTO projects (user_id, name, bundle_id, github_repo, platform, icon_url, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         (user_id, project.name, project.bundle_id, project.github_repo, project.platform, project.icon_url, now, now)
@@ -412,7 +412,7 @@ async def update_project(
 
     updates = project.model_dump(exclude_unset=True)
     if updates:
-        updates["updated_at"] = datetime.now(timezone.utc).isoformat()
+        updates["updated_at"] = datetime.now(timezone.utc)
         set_clause = ", ".join(f"{k} = ?" for k in updates.keys())
         values = list(updates.values()) + [project_id]
         await db.execute(f"UPDATE projects SET {set_clause} WHERE id = ?", values)
@@ -477,7 +477,7 @@ async def submit_questionnaire(
 
     await db.execute(
         "UPDATE projects SET status = 'questionnaire_done', updated_at = ? WHERE id = ?",
-        (datetime.now(timezone.utc).isoformat(), project_id)
+        (datetime.now(timezone.utc), project_id)
     )
     await db.commit()
     return {"message": "Questionnaire saved", "answers_count": len(submission.answers)}
@@ -539,7 +539,7 @@ async def generate_listing(
     for plat in platforms_to_generate:
         listing = await generate_store_listing(answers, plat)
         total_tokens += listing.get("tokens_used", 0)
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(timezone.utc)
 
         await db.execute(
             """INSERT INTO store_listings
@@ -587,7 +587,7 @@ async def generate_listing(
 
     await db.execute(
         "UPDATE projects SET status = 'listing_generated', updated_at = ? WHERE id = ?",
-        (datetime.now(timezone.utc).isoformat(), project_id)
+        (datetime.now(timezone.utc), project_id)
     )
     await db.commit()
 
@@ -616,7 +616,7 @@ async def generate_listing_localization(
 
     listing_data = dict(row)
     localized = await generate_localization(listing_data, language)
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
 
     await db.execute(
         """INSERT INTO store_listings
@@ -697,7 +697,7 @@ async def update_store_listing(
 
     updates = update.model_dump(exclude_unset=True)
     if updates:
-        updates["updated_at"] = datetime.now(timezone.utc).isoformat()
+        updates["updated_at"] = datetime.now(timezone.utc)
         set_clause = ", ".join(f"{k} = ?" for k in updates.keys())
         values = list(updates.values()) + [listing_id]
         await db.execute(f"UPDATE store_listings SET {set_clause} WHERE id = ?", values)
@@ -740,7 +740,7 @@ async def generate_strategy(
     # Generate strategy via AI
     result = await generate_launch_strategy(answers, listing_data)
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
     await db.execute(
         """INSERT INTO project_strategy (project_id, strategy_data, monetization_data, metrics_data, mistakes_data, screenshot_tips, onboarding_tips, tokens_used, created_at, updated_at)
            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -840,7 +840,7 @@ async def generate_campaign(
     # Generate content
     result = await generate_campaign_content(content_type, answers, listing_data)
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
     await db.execute(
         """INSERT INTO campaign_content (project_id, content_type, content_data, tokens_used, created_at, updated_at)
            VALUES (?, ?, ?, ?, ?, ?)
@@ -941,7 +941,7 @@ async def start_pipeline(
 
     await db.execute(
         "UPDATE projects SET status = 'pipeline_running', updated_at = ? WHERE id = ?",
-        (datetime.now(timezone.utc).isoformat(), project_id)
+        (datetime.now(timezone.utc), project_id)
     )
     await db.commit()
 
@@ -1010,7 +1010,7 @@ async def apple_launch(
             # Update project status
             await db.execute(
                 "UPDATE projects SET status = 'apple_launch_running', updated_at = ? WHERE id = ?",
-                (datetime.now(timezone.utc).isoformat(), project_id))
+                (datetime.now(timezone.utc), project_id))
             await db.commit()
 
             # Step 1: Validate credentials
@@ -1078,7 +1078,7 @@ async def _save_apple_launch_result(db: aiosqlite.Connection, project_id: int, s
     """Save Apple launch result to database."""
     try:
         # Store result as JSON in a settings-like table, or update project
-        result_data = json.dumps({"status": status, "steps": steps, "message": message, "timestamp": datetime.now(timezone.utc).isoformat()})
+        result_data = json.dumps({"status": status, "steps": steps, "message": message, "timestamp": datetime.now(timezone.utc)})
 
         # Check if apple_launch_result exists
         cursor = await db.execute(
@@ -1098,7 +1098,7 @@ async def _save_apple_launch_result(db: aiosqlite.Connection, project_id: int, s
         project_status = "submitted" if status == "submitted" else ("listing_updated" if status == "listing_updated" else "pipeline_failed")
         await db.execute(
             "UPDATE projects SET status = ?, updated_at = ? WHERE id = ?",
-            (project_status, datetime.now(timezone.utc).isoformat(), project_id))
+            (project_status, datetime.now(timezone.utc), project_id))
         await db.commit()
     except Exception as e:
         logger.error(f"Failed to save apple launch result: {e}")
@@ -1343,7 +1343,7 @@ async def reset_pipeline(
     if not await cursor.fetchone():
         raise HTTPException(status_code=404, detail="Project not found")
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
     await db.execute(
         "UPDATE projects SET status = 'listing_generated', updated_at = ? WHERE id = ?",
         (now, project_id)
@@ -1475,7 +1475,7 @@ async def submit_setup_feedback(
     credential_type = body.get("credential_type", "")
     message = body.get("message", "")
     screenshot_base64 = body.get("screenshot_base64", "")
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
 
     await db.execute(
         "INSERT INTO setup_feedback (user_id, credential_type, message, screenshot_base64, created_at) VALUES (?, ?, ?, ?, ?)",
@@ -1503,7 +1503,7 @@ async def auto_generate_credential(
 ):
     """Auto-generate signing credentials (android_signing or ios_signing)."""
     user_id = int(current_user["sub"])
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
 
     if credential_type == "android_signing":
         import subprocess
@@ -1714,7 +1714,7 @@ async def helixa_process_idea(
 ):
     user_id = int(current_user["sub"])
     result = await process_idea(req.text)
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
     cursor = await db.execute(
         """INSERT INTO helixa_ideas (user_id, raw_input, idea_name, product_type, overall_score,
            structured_idea, scores, valuation, build_brief, autonomy, created_at)
@@ -1809,7 +1809,7 @@ async def helixa_synthesize(
         })
 
     synthesized = await synthesize_ideas(ideas_summary)
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
     inserted = []
     for s in synthesized:
         cursor = await db.execute(
@@ -1934,7 +1934,7 @@ async def helixa_generate_experimental(
         learning += "Learn from these patterns. Aim higher."
 
     result = await generate_experimental_idea(gen_number, learning)
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
     cursor = await db.execute(
         """INSERT INTO helixa_experimental_ideas
            (user_id, idea_name, product_type, description, overall_score,
@@ -2041,7 +2041,7 @@ async def helixa_import_data(
                  idea["overall_score"],
                  json.dumps(idea.get("structured_idea", {})), json.dumps(idea.get("scores", {})),
                  json.dumps(idea.get("valuation", {})), json.dumps(idea.get("build_brief", {})),
-                 json.dumps(idea.get("autonomy", {})), idea.get("created_at", datetime.now(timezone.utc).isoformat()))
+                 json.dumps(idea.get("autonomy", {})), idea.get("created_at", datetime.now(timezone.utc)))
             )
             imported["ideas"] += 1
 
@@ -2059,7 +2059,7 @@ async def helixa_import_data(
                  json.dumps(s.get("source_idea_ids", [])), json.dumps(s.get("source_idea_names", [])),
                  json.dumps(s.get("concept", {})), s.get("status", "pending"),
                  s.get("user_comment", ""), s.get("ai_revision", ""),
-                 s.get("created_at", datetime.now(timezone.utc).isoformat()))
+                 s.get("created_at", datetime.now(timezone.utc)))
             )
             imported["synthesized"] += 1
 
@@ -2078,7 +2078,7 @@ async def helixa_import_data(
                  e["overall_score"], json.dumps(e.get("structured_idea", {})),
                  json.dumps(e.get("scores", {})), e.get("generation_number", 1),
                  e.get("learning_note", ""), e.get("status", "pending"),
-                 e.get("user_comment", ""), e.get("created_at", datetime.now(timezone.utc).isoformat()))
+                 e.get("user_comment", ""), e.get("created_at", datetime.now(timezone.utc)))
             )
             imported["experimental"] += 1
 
@@ -2115,7 +2115,7 @@ async def helixa_create_app_from_brief(
         structured = {}
 
     app_name = build_brief.get("product_name", idea["idea_name"])
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
 
     # Create project in AutoLaunch
     cursor = await db.execute(
@@ -2167,7 +2167,7 @@ async def seed_data(
     if not await cursor.fetchone():
         raise HTTPException(status_code=404, detail="Project not found")
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
     results = {}
 
     # Seed store listings
@@ -2352,7 +2352,7 @@ Focus on building a polished, working MVP with real functionality."""
     session_url = data.get("url", f"https://app.devin.ai/sessions/{session_id.replace('devin-', '')}")
 
     # Store the planter session in DB
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
     await db.execute(
         """INSERT INTO planter_sessions
            (user_id, idea_id, idea_name, devin_session_id, session_url, status, created_at, updated_at)
@@ -2430,7 +2430,7 @@ async def planter_get_session(
         if devin_data.get("pull_request"):
             pr_url = devin_data["pull_request"].get("url", "")
 
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(timezone.utc)
         await db.execute(
             """UPDATE planter_sessions SET status = ?, title = ?, pr_url = ?, updated_at = ?
                WHERE devin_session_id = ?""",
