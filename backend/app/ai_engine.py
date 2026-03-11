@@ -10,8 +10,8 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 async def get_openai_client() -> AsyncOpenAI:
     key = OPENAI_API_KEY
     if not key:
-        from app.database import DATABASE_PATH
-        env_path = os.path.join(os.path.dirname(DATABASE_PATH), ".env")
+        from app.database import DATABASE_URL as DATABASE_PATH
+        env_path = ".env"
         if os.path.exists(env_path):
             with open(env_path) as f:
                 for line in f:
