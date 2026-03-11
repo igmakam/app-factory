@@ -2609,3 +2609,135 @@ async def delete_metaprompt(
     await db.execute("DELETE FROM metaprompts WHERE id = ?", (mp_id,))
     await db.commit()
     return {"ok": True}
+
+
+# ==================== BUILDER (Devin replacement) ====================
+from app.build_manager import can_start_build, update_session, append_log, STAGE_DESCRIPTIONS, get_active_count, PLATFORM_LIMITS
+
+class BuildStartRequest(BaseModel):
+    app_name: str
+    app_description: str
+    platform: str = "ios"  # ios | android | web
+
+class BuildStatusUpdate(BaseModel):
+    status: Optional[str] = None
+    current_stage: Optional[str] = None
+    progress_pct: Optional[int] = None
+    github_repo: Optional[str] = None
+    deploy_url: Optional[str] = None
+    log_line: Optional[str] = None
+    error_msg: Optional[str] = None
+
+
+@app.get("/api/builder/sessions")
+async def get_build_sessions(
+    db: aiosqlite.Connection = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    """Get all build sessions for current user."""
+    cursor = await db.execute(
+        "SELECT * FROM build_sessions WHERE user_id = ? ORDER BY created_at DESC LIMIT 50",
+        (current_user["user_id"],)
+    )
+    rows = await cursor.fetchall()
+    result = []
+    for r in rows:
+        d = dict(r)
+        d["stage_label"] = STAGE_DESCRIPTIONS.get(d.get("status", ""), d.get("status", ""))
+        result.append(d)
+    return result
+
+
+@app.post("/api/builder/start", status_code=201)
+async def start_build(
+    req: BuildStartRequest,
+    db: aiosqlite.Connection = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    """Queue a new app build."""
+    user_id = current_user["user_id"]
+    now = datetime.now(timezone.utc)
+
+    # Check capacity
+    if not await can_start_build(db, req.platform):
+        active = await get_active_count(db, req.platform)
+        raise HTTPException(status_code=429, detail=f"Build queue full for {req.platform}: {active} active builds")
+
+    cursor = await db.execute(
+        "INSERT INTO build_sessions (user_id, app_name, app_description, platform, status, current_stage, created_at, updated_at, started_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        (user_id, req.app_name, req.app_description, req.platform, "validating", "validating", now, now, now)
+    )
+    await db.commit()
+    session_id = cursor.lastrowid
+
+    return {
+        "id": session_id,
+        "status": "validating",
+        "message": f"Build started for '{req.app_name}' ({req.platform})",
+        "app_name": req.app_name,
+        "platform": req.platform,
+    }
+
+
+@app.get("/api/builder/sessions/{session_id}")
+async def get_build_session(
+    session_id: int,
+    db: aiosqlite.Connection = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    """Get a specific build session."""
+    cursor = await db.execute("SELECT * FROM build_sessions WHERE id = ? AND user_id = ?", (session_id, current_user["user_id"]))
+    row = await cursor.fetchone()
+    if not row:
+        raise HTTPException(status_code=404, detail="Build session not found")
+    d = dict(row)
+    d["stage_label"] = STAGE_DESCRIPTIONS.get(d.get("status", ""), d.get("status", ""))
+    return d
+
+
+@app.patch("/api/builder/sessions/{session_id}/status")
+async def update_build_status(
+    session_id: int,
+    update: BuildStatusUpdate,
+    db: aiosqlite.Connection = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    """Update build session status (called by subagent)."""
+    updates = {}
+    if update.status: updates["status"] = update.status
+    if update.current_stage: updates["current_stage"] = update.current_stage
+    if update.progress_pct is not None: updates["progress_pct"] = update.progress_pct
+    if update.github_repo: updates["github_repo"] = update.github_repo
+    if update.deploy_url: updates["deploy_url"] = update.deploy_url
+    if update.error_msg: updates["error_msg"] = update.error_msg
+    if update.status in ("done", "failed", "cancelled"):
+        updates["finished_at"] = datetime.now(timezone.utc)
+
+    if updates:
+        await update_session(db, session_id, **updates)
+    if update.log_line:
+        await append_log(db, session_id, update.log_line)
+
+    return {"ok": True}
+
+
+@app.delete("/api/builder/sessions/{session_id}")
+async def cancel_build(
+    session_id: int,
+    db: aiosqlite.Connection = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    """Cancel a build session."""
+    await update_session(db, session_id, status="cancelled", finished_at=datetime.now(timezone.utc))
+    return {"ok": True}
+
+
+@app.get("/api/builder/queue/status")
+async def get_queue_status(db: aiosqlite.Connection = Depends(get_db)):
+    """Public endpoint — queue capacity status."""
+    result = {}
+    for platform in ["ios", "android", "web"]:
+        active = await get_active_count(db, platform)
+        limit = PLATFORM_LIMITS.get(platform, 2)
+        result[platform] = {"active": active, "limit": limit, "available": limit - active}
+    return result

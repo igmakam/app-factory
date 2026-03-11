@@ -533,5 +533,35 @@ def _get_schema() -> str:
             model TEXT NOT NULL DEFAULT 'claude-sonnet-4-5',
             created_at TIMESTAMPTZ DEFAULT NOW(),
             updated_at TIMESTAMPTZ DEFAULT NOW()
+        );
+
+        CREATE TABLE IF NOT EXISTS build_sessions (
+            id SERIAL PRIMARY KEY,
+            user_id INTEGER NOT NULL REFERENCES users(id),
+            app_name TEXT NOT NULL DEFAULT '',
+            app_description TEXT NOT NULL DEFAULT '',
+            platform TEXT NOT NULL DEFAULT 'ios',
+            status TEXT NOT NULL DEFAULT 'queued',
+            current_stage TEXT NOT NULL DEFAULT 'queued',
+            progress_pct INTEGER NOT NULL DEFAULT 0,
+            github_repo TEXT NOT NULL DEFAULT '',
+            deploy_url TEXT NOT NULL DEFAULT '',
+            build_log TEXT NOT NULL DEFAULT '',
+            error_msg TEXT NOT NULL DEFAULT '',
+            subagent_session_key TEXT NOT NULL DEFAULT '',
+            retry_count INTEGER NOT NULL DEFAULT 0,
+            max_retries INTEGER NOT NULL DEFAULT 2,
+            created_at TIMESTAMPTZ DEFAULT NOW(),
+            updated_at TIMESTAMPTZ DEFAULT NOW(),
+            started_at TIMESTAMPTZ,
+            finished_at TIMESTAMPTZ
+        );
+
+        CREATE TABLE IF NOT EXISTS build_queue_config (
+            id SERIAL PRIMARY KEY,
+            max_ios_concurrent INTEGER NOT NULL DEFAULT 2,
+            max_web_concurrent INTEGER NOT NULL DEFAULT 3,
+            max_android_concurrent INTEGER NOT NULL DEFAULT 2,
+            updated_at TIMESTAMPTZ DEFAULT NOW()
         )
     """
