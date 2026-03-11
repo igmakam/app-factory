@@ -522,5 +522,16 @@ def _get_schema() -> str:
             repo_url TEXT NOT NULL DEFAULT '',
             created_at TIMESTAMPTZ DEFAULT NOW(),
             updated_at TIMESTAMPTZ DEFAULT NOW()
+        );
+
+        CREATE TABLE IF NOT EXISTS metaprompts (
+            id SERIAL PRIMARY KEY,
+            stage TEXT NOT NULL DEFAULT 'Vlastný',
+            title TEXT NOT NULL,
+            description TEXT NOT NULL DEFAULT '',
+            prompt TEXT NOT NULL,
+            model TEXT NOT NULL DEFAULT 'claude-sonnet-4-5',
+            created_at TIMESTAMPTZ DEFAULT NOW(),
+            updated_at TIMESTAMPTZ DEFAULT NOW()
         )
     """

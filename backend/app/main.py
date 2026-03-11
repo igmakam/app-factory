@@ -2530,3 +2530,82 @@ async def debug_test_login(user: UserLogin, db: aiosqlite.Connection = Depends(g
         }
     except Exception as e:
         return {"error": str(e), "trace": traceback.format_exc()}
+
+
+# ==================== METAPROMPTS ====================
+
+class MetapromptCreate(BaseModel):
+    stage: str = "Vlastný"
+    title: str
+    description: str = ""
+    prompt: str
+    model: str = "claude-sonnet-4-5"
+
+class MetapromptUpdate(BaseModel):
+    stage: Optional[str] = None
+    title: Optional[str] = None
+    description: Optional[str] = None
+    prompt: Optional[str] = None
+    model: Optional[str] = None
+
+
+@app.get("/api/metaprompts")
+async def get_metaprompts(db: aiosqlite.Connection = Depends(get_db)):
+    """Vráti všetky metaprompty."""
+    cursor = await db.execute("SELECT * FROM metaprompts ORDER BY id ASC")
+    rows = await cursor.fetchall()
+    return [dict(r) for r in rows]
+
+
+@app.post("/api/metaprompts", status_code=201)
+async def create_metaprompt(
+    data: MetapromptCreate,
+    db: aiosqlite.Connection = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    """Vytvorí nový metaprompt."""
+    now = datetime.now(timezone.utc)
+    cursor = await db.execute(
+        "INSERT INTO metaprompts (stage, title, description, prompt, model, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        (data.stage, data.title, data.description, data.prompt, data.model, now, now)
+    )
+    await db.commit()
+    new_id = cursor.lastrowid
+    cursor2 = await db.execute("SELECT * FROM metaprompts WHERE id = ?", (new_id,))
+    row = await cursor2.fetchone()
+    return dict(row)
+
+
+@app.put("/api/metaprompts/{mp_id}")
+async def update_metaprompt(
+    mp_id: int,
+    data: MetapromptUpdate,
+    db: aiosqlite.Connection = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    """Aktualizuje metaprompt."""
+    updates = {k: v for k, v in data.dict().items() if v is not None}
+    if not updates:
+        raise HTTPException(status_code=400, detail="No fields to update")
+    updates["updated_at"] = datetime.now(timezone.utc)
+    set_clause = ", ".join(f"{k} = ?" for k in updates)
+    values = list(updates.values()) + [mp_id]
+    await db.execute(f"UPDATE metaprompts SET {set_clause} WHERE id = ?", values)
+    await db.commit()
+    cursor = await db.execute("SELECT * FROM metaprompts WHERE id = ?", (mp_id,))
+    row = await cursor.fetchone()
+    if not row:
+        raise HTTPException(status_code=404, detail="Not found")
+    return dict(row)
+
+
+@app.delete("/api/metaprompts/{mp_id}")
+async def delete_metaprompt(
+    mp_id: int,
+    db: aiosqlite.Connection = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    """Zmaže metaprompt."""
+    await db.execute("DELETE FROM metaprompts WHERE id = ?", (mp_id,))
+    await db.commit()
+    return {"ok": True}
