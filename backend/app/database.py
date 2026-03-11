@@ -5,6 +5,7 @@ Database layer — PostgreSQL via asyncpg (migrated from SQLite)
 import asyncpg
 import os
 import bcrypt
+from datetime import datetime, timezone
 from typing import AsyncGenerator
 
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://localhost/autolauncher")
@@ -130,6 +131,27 @@ class AsyncDBContext:
         object.__setattr__(self, name, value)
 
 
+def _coerce_args(args):
+    """Convert ISO datetime strings to datetime objects for asyncpg compatibility."""
+    result = []
+    for a in args:
+        if isinstance(a, str):
+            # Try ISO datetime parse (asyncpg needs datetime objects, not strings)
+            for fmt in ('%Y-%m-%dT%H:%M:%S.%f%z', '%Y-%m-%dT%H:%M:%S%z',
+                        '%Y-%m-%dT%H:%M:%S.%f', '%Y-%m-%dT%H:%M:%S',
+                        '%Y-%m-%d %H:%M:%S.%f', '%Y-%m-%d %H:%M:%S'):
+                try:
+                    result.append(datetime.strptime(a, fmt).replace(tzinfo=timezone.utc) if '+' not in a and 'Z' not in a else datetime.fromisoformat(a))
+                    break
+                except ValueError:
+                    continue
+            else:
+                result.append(a)
+        else:
+            result.append(a)
+    return tuple(result)
+
+
 class RealDB:
     """
     Plnohodnotný DB objekt pre get_db() dependency.
@@ -141,6 +163,7 @@ class RealDB:
 
     async def execute(self, sql: str, args=()):
         sql_pg = _convert_sql(sql)
+        args = _coerce_args(args)
         stripped = sql_pg.strip().upper()
 
         if stripped.startswith("INSERT") and "RETURNING" not in stripped:
