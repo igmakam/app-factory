@@ -1,6 +1,21 @@
-from pydantic import BaseModel
-from typing import Optional, List
+from pydantic import BaseModel, field_validator, model_validator, ConfigDict
+from typing import Optional, List, Any, Union
 from datetime import datetime
+
+
+class _DtModel(BaseModel):
+    """Base model that auto-converts datetime fields to ISO strings."""
+    model_config = ConfigDict(json_encoders={datetime: lambda v: v.isoformat()})
+
+    @model_validator(mode="before")
+    @classmethod
+    def _coerce_datetimes(cls, data: Any) -> Any:
+        if not isinstance(data, dict):
+            return data
+        for k, v in data.items():
+            if isinstance(v, datetime):
+                data[k] = v.isoformat()
+        return data
 
 
 # ==================== AUTH ====================
@@ -14,12 +29,26 @@ class UserLogin(BaseModel):
     email: str
     password: str
 
-class UserResponse(BaseModel):
+def _dt(v: Any) -> str:
+    """Convert datetime/None to ISO string for all response models."""
+    if v is None:
+        return ""
+    if isinstance(v, datetime):
+        return v.isoformat()
+    return str(v)
+
+
+class UserResponse(_DtModel):
     id: int
     email: str
     full_name: str
     avatar_url: str
-    created_at: str
+    created_at: str = ""
+
+    @field_validator("created_at", mode="before")
+    @classmethod
+    def coerce_created_at(cls, v):
+        return _dt(v)
 
 class TokenResponse(BaseModel):
     access_token: str
@@ -33,7 +62,7 @@ class CredentialSave(BaseModel):
     credential_type: str  # apple, google, github, ios_signing, android_signing
     credential_data: dict
 
-class CredentialStatus(BaseModel):
+class CredentialStatus(_DtModel):
     credential_type: str
     is_configured: bool
     is_valid: bool
@@ -58,7 +87,7 @@ class ProjectUpdate(BaseModel):
     status: Optional[str] = None
     icon_url: Optional[str] = None
 
-class ProjectResponse(BaseModel):
+class ProjectResponse(_DtModel):
     id: int
     name: str
     bundle_id: str
@@ -93,7 +122,7 @@ class QuestionnaireSubmit(BaseModel):
 
 # ==================== STORE LISTINGS ====================
 
-class StoreListingResponse(BaseModel):
+class StoreListingResponse(_DtModel):
     id: int
     project_id: int
     platform: str
@@ -138,7 +167,7 @@ class StoreListingUpdate(BaseModel):
 
 # ==================== PIPELINE ====================
 
-class PipelineStepResponse(BaseModel):
+class PipelineStepResponse(_DtModel):
     id: int
     step_name: str
     step_order: int
@@ -149,7 +178,7 @@ class PipelineStepResponse(BaseModel):
     started_at: Optional[str] = None
     completed_at: Optional[str] = None
 
-class PipelineRunResponse(BaseModel):
+class PipelineRunResponse(_DtModel):
     id: int
     project_id: int
     status: str

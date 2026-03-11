@@ -3,150 +3,1141 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>App Factory — Denný prehľad</title>
+  <title>App Factory — Prehľad</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0f0f0f;
-      color: #e0e0e0;
-      min-height: 100vh;
-      padding: 40px 20px;
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #080808; color: #e0e0e0; min-height: 100vh; padding: 24px 20px; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    h1 { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+    .al-link { font-size: 11px; padding: 5px 12px; border-radius: 5px; background: #111; color: #64b5f6; border: 1px solid #1e2e3e; text-decoration: none; font-weight: 600; transition: background .15s; }
+    .al-link:hover { background: #1a2a3a; }
+    .tabs { display: flex; gap: 2px; margin-bottom: 22px; border-bottom: 1px solid #141414; }
+    .tab { font-size: 12px; font-weight: 500; padding: 7px 14px; cursor: pointer; color: #3a3a3a; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s; }
+    .tab:hover { color: #666; }
+    .tab.active { color: #ccc; border-bottom-color: #555; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ========== PIPELINE NODE GRAPH ========== */
+    .pg-outer {
+      background: #0c0c0c;
+      border: 1px solid #1a1a1a;
+      border-radius: 14px;
+      padding: 24px 20px 20px;
+      overflow: hidden;
     }
-    .container { max-width: 800px; margin: 0 auto; }
-    h1 {
-      font-size: 28px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 6px;
+    .pg-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px;
     }
-    .subtitle {
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 40px;
+    .pg-title {
+      font-size: 10px; font-weight: 700; color: #2a2a2a; letter-spacing: 2px; text-transform: uppercase;
     }
-    .day-group { margin-bottom: 48px; }
-    .day-header {
-      font-size: 13px;
-      font-weight: 600;
-      color: #555;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 16px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #1e1e1e;
+
+    /* LIVE/DEMO badge */
+    .data-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.3px;
     }
-    .entry {
-      display: flex;
-      gap: 16px;
-      padding: 16px 0;
-      border-bottom: 1px solid #1a1a1a;
+    .data-badge.live { background: #071a07; border: 1px solid #1a4a1a; color: #4caf50; }
+    .data-badge.demo { background: #1a1a07; border: 1px solid #4a4a1a; color: #ffd54f; }
+    .data-badge.loading { background: #0f0f0f; border: 1px solid #222; color: #444; }
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .data-badge.live .badge-dot { background: #4caf50; animation: badge-blink 1.4s ease-in-out infinite; }
+    .data-badge.demo .badge-dot { background: #ffd54f; }
+    .data-badge.loading .badge-dot { background: #333; }
+    @keyframes badge-blink { 0%,100%{opacity:1;box-shadow:0 0 4px rgba(76,175,80,0.6)} 50%{opacity:0.4;box-shadow:none} }
+
+    /* NODE ROW */
+    .pg-nodes {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px; overflow-x: auto; padding-bottom: 4px; gap: 0;
     }
+    .pg-node-wrap { display: flex; align-items: center; flex: 1; min-width: 0; }
+    .pg-node {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      flex-shrink: 0;
+    }
+    .node-circle {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      border: 2px solid #1e1e1e;
+      background: radial-gradient(circle at 35% 35%, #1a1a1a, #0d0d0d);
+      position: relative; transition: border-color .4s, box-shadow .4s;
+      cursor: default;
+    }
+    .node-circle.nc-idle   { border-color: #1e1e1e; }
+    .node-circle.nc-running { border-color: #2a5a2a; box-shadow: 0 0 18px rgba(76,175,80,0.35); animation: node-pulse-green 2s ease-in-out infinite; }
+    .node-circle.nc-error  { border-color: #5a2a2a; box-shadow: 0 0 14px rgba(239,83,80,0.3); animation: node-pulse-red 1.6s ease-in-out infinite; }
+    .node-circle.nc-done   { border-color: #1a3a5a; box-shadow: 0 0 12px rgba(100,181,246,0.25); }
+    @keyframes node-pulse-green { 0%,100%{box-shadow:0 0 14px rgba(76,175,80,0.3)} 50%{box-shadow:0 0 28px rgba(76,175,80,0.55)} }
+    @keyframes node-pulse-red   { 0%,100%{box-shadow:0 0 10px rgba(239,83,80,0.2)} 50%{box-shadow:0 0 24px rgba(239,83,80,0.5)} }
+
+    .node-count {
+      position: absolute; top: -4px; right: -4px;
+      width: 18px; height: 18px; border-radius: 50%;
+      font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+      border: 1px solid #0c0c0c;
+    }
+    .nc-count-run { background: #2a5a2a; color: #81c784; }
+    .nc-count-err { background: #5a2a2a; color: #ef9a9a; }
+
+    .node-label { font-size: 9px; color: #3a3a3a; text-align: center; white-space: nowrap; font-weight: 500; }
+    .node-label.nl-active { color: #888; }
+
+    /* CONNECTOR */
+    .pg-connector {
+      flex: 1; height: 2px; position: relative; overflow: hidden;
+      background: #141414; min-width: 12px;
+    }
+    /* Flowing light left→right */
+    .pg-connector::after {
+      content: '';
+      position: absolute; top: 0; left: -60%; width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent 0%, #1a3a1a 30%, #3a7a3a 50%, #1a3a1a 70%, transparent 100%);
+      animation: flow-right 2.5s linear infinite;
+    }
+    .pg-connector.conn-idle::after { opacity: 0.3; }
+    .pg-connector.conn-active::after {
+      background: linear-gradient(90deg, transparent 0%, #1a4a1a 30%, #4caf50 50%, #1a4a1a 70%, transparent 100%);
+      opacity: 1; animation-duration: 1.2s;
+    }
+    .pg-connector.conn-error::after {
+      background: linear-gradient(90deg, transparent 0%, #4a1a1a 30%, #ef5350 50%, #4a1a1a 70%, transparent 100%);
+      opacity: 1; animation-duration: 1.8s;
+    }
+    @keyframes flow-right { from { left: -60%; } to { left: 110%; } }
+
+    /* Arrow tip on connector */
+    .pg-connector::before {
+      content: ''; position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%);
+      border-left: 5px solid #1e1e1e; border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+    }
+
+    /* APP CHIPS */
+    .pg-apps { min-height: 36px; position: relative; }
+    .pg-no-apps { text-align: center; color: #1e1e1e; font-size: 11px; padding: 16px 0; }
+    .pg-stage-cols {
+      display: grid; gap: 6px;
+    }
+    .pg-stage-col { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+    .app-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #111; border: 1px solid #1e1e1e; border-radius: 5px;
+      padding: 4px 9px; font-size: 10px; color: #bbb; white-space: nowrap;
+      animation: chip-in .5s cubic-bezier(0.22,1,0.36,1) forwards;
+      max-width: 120px;
+    }
+    @keyframes chip-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    .chip-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .chip-name { overflow: hidden; text-overflow: ellipsis; }
+    .app-chip.chip-running { border-color: #2a4a2a; }
+    .app-chip.chip-error   { border-color: #4a2a2a; }
+    .app-chip.chip-done    { border-color: #1a2a4a; opacity: 0.6; }
+    .app-chip.chip-pending { opacity: 0.4; }
+
+    /* ========== STAGE DETAIL PANEL ========== */
+    .node-circle { cursor: pointer; }
+    .node-circle:hover { opacity: 0.85; transform: scale(1.06); transition: transform .15s, opacity .15s; }
+    .node-circle.selected { border-color: #fff !important; box-shadow: 0 0 0 2px rgba(255,255,255,0.15) !important; }
+
+    .stage-detail {
+      background: #0f0f0f; border: 1px solid #222; border-radius: 10px;
+      margin: 12px 0 16px; padding: 16px 18px;
+      animation: detail-in .2s ease-out;
+    }
+    @keyframes detail-in { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+    .detail-header { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .detail-icon { font-size:22px; }
+    .detail-title { font-size:13px; font-weight:700; color:#ddd; }
+    .detail-desc  { font-size:10px; color:#444; margin-top:1px; }
+    .detail-close { margin-left:auto; font-size:16px; color:#333; cursor:pointer; padding:2px 6px; border-radius:4px; transition:color .15s; }
+    .detail-close:hover { color:#888; }
+
+    .substeps { display:flex; flex-direction:column; gap:5px; }
+    .substep {
+      display:flex; align-items:center; gap:9px;
+      padding:7px 10px; border-radius:6px;
+      background:#111; border:1px solid #161616;
+    }
+    .substep.ss-done    { border-left:3px solid #1a4a1a; }
+    .substep.ss-running { border-left:3px solid #1a3a5a; animation: substep-pulse 2s infinite; }
+    .substep.ss-error   { border-left:3px solid #4a1a1a; }
+    .substep.ss-waiting { border-left:3px solid #1a1a1a; opacity:.5; }
+    @keyframes substep-pulse { 0%,100%{border-left-color:#1a3a5a} 50%{border-left-color:#64b5f6} }
+    .ss-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+    .ss-done    .ss-dot { background:#4caf50; }
+    .ss-running .ss-dot { background:#64b5f6; animation:badge-blink 1.2s infinite; }
+    .ss-error   .ss-dot { background:#ef5350; }
+    .ss-waiting .ss-dot { background:#2a2a2a; }
+    .ss-name { font-size:11px; color:#aaa; flex:1; }
+    .ss-done    .ss-name { color:#555; text-decoration:line-through; }
+    .ss-error   .ss-name { color:#ef9a9a; }
+    .ss-status { font-size:9px; color:#333; }
+    .ss-done    .ss-status { color:#1a4a1a; }
+    .ss-running .ss-status { color:#1a3a5a; }
+    .ss-error   .ss-status { color:#5a2a2a; }
+
+    .detail-apps-here { margin-top:12px; padding-top:12px; border-top:1px solid #161616; }
+    .detail-apps-label { font-size:9px; color:#2a2a2a; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+    .detail-apps-list { display:flex; flex-wrap:wrap; gap:5px; }
+
+    /* ========== SECTIONS ========== */
+    .section-block { margin-top: 16px; background: #0c0c0c; border: 1px solid #1a1a1a; border-radius: 14px; padding: 18px 20px; }
+    .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .section-title { font-size: 11px; font-weight: 700; color: #555; letter-spacing: 0.5px; }
+    .section-sub { font-size: 10px; color: #252525; flex: 1; }
+    .refresh-btn { font-size: 10px; padding: 3px 10px; border-radius: 4px; cursor: pointer; background: #111; color: #444; border: 1px solid #1e1e1e; transition: all .15s; }
+    .refresh-btn:hover { color: #888; border-color: #333; }
+
+    /* SESSIONS */
+    .session-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 12px; border-radius: 7px; border: 1px solid #161616;
+      background: #0f0f0f; margin-bottom: 6px;
+    }
+    .session-row:last-child { margin-bottom: 0; }
+    .sess-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .sess-dot.active  { background: #4caf50; animation: badge-blink 1.4s infinite; }
+    .sess-dot.idle    { background: #555; }
+    .sess-dot.working { background: #64b5f6; animation: badge-blink 1.2s infinite; }
+    .sess-dot.waiting { background: #ffb74d; }
+    .sess-info { flex: 1; min-width: 0; }
+    .sess-label { font-size: 11px; font-weight: 600; color: #bbb; }
+    .sess-task  { font-size: 10px; color: #444; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sess-app   { font-size: 9px; color: #2a4a2a; background: #0d1a0d; border: 1px solid #1a3a1a; border-radius: 3px; padding: 1px 6px; white-space: nowrap; flex-shrink: 0; }
+    .sess-type-badge { font-size: 9px; padding: 1px 6px; border-radius: 3px; font-weight: 600; flex-shrink: 0; }
+    .sess-type-main   { background: #1a1a0d; color: #fff176; }
+    .sess-type-sub    { background: #0d1a2a; color: #64b5f6; }
+    .sess-type-cron   { background: #1a0d1a; color: #ce93d8; }
+    .sess-since { font-size: 9px; color: #2a2a2a; flex-shrink: 0; }
+    .no-sessions { text-align: center; color: #222; font-size: 11px; padding: 12px 0; }
+
+    /* VITALS */
+    .vitals-groups { display: flex; flex-direction: column; gap: 10px; }
+    .vitals-group-label { font-size: 9px; color: #2a2a2a; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .vitals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px; }
+    .vital-card {
+      display: flex; align-items: center; gap: 9px;
+      padding: 8px 12px; border-radius: 6px;
+      background: #0f0f0f; border: 1px solid #161616;
+      transition: border-color .2s;
+    }
+    .vital-card.v-ok    { border-left: 3px solid #1a4a1a; }
+    .vital-card.v-err   { border-left: 3px solid #4a1a1a; }
+    .vital-card.v-slow  { border-left: 3px solid #4a3a1a; }
+    .vital-card.v-check { border-left: 3px solid #1a1a1a; }
+    .vital-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .v-ok   .vital-dot { background: #4caf50; }
+    .v-err  .vital-dot { background: #ef5350; }
+    .v-slow .vital-dot { background: #ffb74d; animation: badge-blink 1.5s infinite; }
+    .v-check .vital-dot { background: #333; animation: badge-blink 1s infinite; }
+    .vital-info { flex: 1; min-width: 0; }
+    .vital-label { font-size: 10px; font-weight: 500; color: #888; }
+    .vital-status { font-size: 9px; color: #333; margin-top: 1px; }
+    .v-ok   .vital-status { color: #2a5a2a; }
+    .v-err  .vital-status { color: #5a2a2a; }
+    .v-slow .vital-status { color: #5a3a1a; }
+    .vital-ms { font-size: 9px; color: #2a2a2a; flex-shrink: 0; }
+    .v-ok  .vital-ms { color: #1a3a1a; }
+    .v-slow .vital-ms { color: #4a3a1a; }
+
+    /* ========== LOG ========== */
+    .day-group { margin-bottom: 26px; }
+    .day-header { font-size: 10px; font-weight: 600; color: #2a2a2a; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px solid #111; }
+    .entry { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #0e0e0e; }
     .entry:last-child { border-bottom: none; }
-    .time {
-      font-size: 12px;
-      color: #555;
-      min-width: 48px;
-      padding-top: 2px;
-    }
-    .content { flex: 1; }
-    .title {
-      font-size: 15px;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-    .desc {
-      font-size: 14px;
-      color: #888;
-      line-height: 1.5;
-    }
-    .tag {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 4px;
-      margin-left: 8px;
-      vertical-align: middle;
-    }
-    .tag-done { background: #1a3a1a; color: #4caf50; }
-    .tag-infra { background: #1a2a3a; color: #64b5f6; }
-    .tag-fix { background: #3a2a1a; color: #ffb74d; }
-    .empty {
-      text-align: center;
-      color: #333;
-      padding: 60px 0;
-      font-size: 15px;
-    }
+    .etime { font-size: 10px; color: #2a2a2a; min-width: 36px; padding-top: 1px; }
+    .econtent { flex: 1; }
+    .etitle { font-size: 11px; font-weight: 600; color: #ccc; margin-bottom: 2px; }
+    .edesc { font-size: 10px; color: #555; line-height: 1.5; }
+    .tag { display: inline-block; font-size: 9px; font-weight: 600; padding: 1px 6px; border-radius: 3px; margin-left: 6px; vertical-align: middle; }
+    .tag-done  { background: #0d1f0d; color: #4caf50; }
+    .tag-infra { background: #0d1a2a; color: #64b5f6; }
+    .tag-fix   { background: #2a1a0d; color: #ffb74d; }
+
+    /* ========== TASKS ========== */
+    .task-filters { display: flex; gap: 5px; margin-bottom: 14px; flex-wrap: wrap; }
+    .filter-btn { font-size: 10px; padding: 3px 9px; border-radius: 16px; cursor: pointer; background: #0e0e0e; color: #444; border: 1px solid #161616; transition: all .15s; }
+    .filter-btn:hover { color: #777; }
+    .filter-btn.active { background: #171717; color: #ccc; border-color: #2a2a2a; }
+    .task { padding: 10px 12px; border-radius: 5px; border: 1px solid #141414; margin-bottom: 6px; background: #0e0e0e; }
+    .task-header { display: flex; align-items: center; gap: 7px; margin-bottom: 3px; }
+    .task-title { font-size: 11px; font-weight: 600; color: #ccc; flex: 1; }
+    .task-desc  { font-size: 10px; color: #444; line-height: 1.5; }
+    .priority { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+    .priority-high   { background: #ef5350; }
+    .priority-medium { background: #ffb74d; }
+    .priority-low    { background: #333; }
+    .cat-badge  { font-size: 9px; padding: 1px 6px; border-radius: 3px; font-weight: 500; }
+    .cat-backend { background: #0d1a2a; color: #64b5f6; }
+    .cat-ios     { background: #1a0d2a; color: #ce93d8; }
+    .cat-android { background: #0d2a1a; color: #80cbc4; }
+    .cat-infra   { background: #1a1a0d; color: #fff176; }
+    .status-approved { opacity: 0.45; }
+    .status-done     { opacity: 0.25; }
+    .approve-btn { font-size: 10px; padding: 2px 9px; border-radius: 3px; cursor: pointer; background: #0d1f0d; color: #4caf50; border: 1px solid #1a4a1a; transition: all .15s; white-space: nowrap; }
+    .approved-label { font-size: 10px; color: #4caf50; }
+    .done-label     { font-size: 10px; color: #333; }
+    .empty { text-align: center; color: #1a1a1a; padding: 40px 0; font-size: 11px; }
+
+    /* APPROVAL LOG */
+    .alog-entry { display:flex; align-items:baseline; gap:10px; padding:6px 0; border-bottom:1px solid #0e0e0e; }
+    .alog-entry:last-child { border-bottom:none; }
+    .alog-time  { font-size:9px; color:#252525; white-space:nowrap; flex-shrink:0; font-variant-numeric:tabular-nums; }
+    .alog-title { font-size:10px; color:#666; flex:1; }
+    .alog-cat   { font-size:9px; padding:1px 5px; border-radius:3px; flex-shrink:0; }
+
+    /* ========== PROMPTS ========== */
+    .prompts-toolbar { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+    .new-prompt-btn { font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 5px; cursor: pointer; background: #0d1a2a; color: #64b5f6; border: 1px solid #1a2a3a; transition: background .15s; }
+    .new-prompt-btn:hover { background: #122030; }
+    .np-form { background: #0e0e0e; border: 1px solid #1a2a3a; border-radius: 7px; padding: 14px; margin-bottom: 12px; }
+    .np-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .np-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; flex: 1; min-width: 140px; }
+    .np-field-sm { flex: 0 0 110px; }
+    .np-field label { font-size: 9px; color: #333; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .np-field input, .np-field select, .np-field textarea { background: #080808; border: 1px solid #1e1e1e; border-radius: 4px; color: #bbb; font-size: 11px; padding: 6px 8px; font-family: inherit; outline: none; transition: border-color .15s; resize: vertical; }
+    .np-field input:focus, .np-field select:focus, .np-field textarea:focus { border-color: #2a3a4a; }
+    .np-field select option { background: #0e0e0e; }
+    .np-actions { display: flex; gap: 7px; margin-top: 4px; }
+    .prompt-card { border: 1px solid #141414; border-radius: 5px; background: #0e0e0e; margin-bottom: 7px; overflow: hidden; }
+    .prompt-header { display: flex; align-items: center; gap: 8px; padding: 10px 12px; cursor: pointer; transition: background .15s; }
+    .prompt-header:hover { background: #111; }
+    .stage-badge { font-size: 9px; font-weight: 600; padding: 2px 7px; border-radius: 3px; background: #0d1a2a; color: #64b5f6; flex-shrink: 0; }
+    .prompt-title { font-size: 11px; font-weight: 600; color: #ccc; flex: 1; }
+    .prompt-model { font-size: 9px; color: #2a2a2a; }
+    .prompt-toggle { font-size: 11px; color: #2a2a2a; transition: transform .2s; }
+    .prompt-toggle.open { transform: rotate(180deg); }
+    .prompt-body { display: none; padding: 0 12px 12px; }
+    .prompt-body.open { display: block; }
+    .prompt-desc { font-size: 10px; color: #444; margin-bottom: 8px; line-height: 1.5; }
+    .prompt-text { font-family: 'SF Mono','Fira Code',monospace; font-size: 10px; line-height: 1.6; color: #777; background: #080808; border: 1px solid #141414; border-radius: 4px; padding: 8px; white-space: pre-wrap; word-break: break-word; min-height: 50px; }
+    .prompt-text[contenteditable=true] { outline: none; border-color: #2a3a4a; color: #bbb; }
+    .prompt-actions { display: flex; gap: 7px; margin-top: 7px; }
+    .prompt-btn { font-size: 10px; padding: 3px 10px; border-radius: 4px; cursor: pointer; border: 1px solid #161616; background: #111; color: #444; transition: all .15s; }
+    .prompt-btn:hover { color: #777; }
+    .prompt-btn.save { background: #0d1f0d; color: #4caf50; border-color: #1a4a1a; }
+    .prompt-btn.cancel { color: #ef5350; border-color: #1a0d0d; }
+    .saved-note { font-size: 10px; color: #4caf50; display: none; }
+    .prompt-delete { font-size: 10px; color: #2a2a2a; cursor: pointer; padding: 2px 7px; border-radius: 3px; border: 1px solid #141414; background: none; transition: all .15s; }
+    .prompt-delete:hover { color: #ef5350; border-color: #1a0d0d; }
   </style>
 </head>
 <body>
-  <div class="container">
+<div class="container">
+  <div class="top-bar">
     <h1>App Factory</h1>
-    <p class="subtitle">Denný prehľad dokončených vecí</p>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span id="refresh-ticker" style="font-size:9px;color:#252525;font-variant-numeric:tabular-nums"></span>
+      <a class="al-link" href="https://autolauncher-app-dpz5obbb.devinapps.com" target="_blank">↗ Autolauncher</a>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('belt')">🏭 Pipeline</div>
+    <div class="tab" onclick="switchTab('prompts')">🧠 Metaprompty</div>
+    <div class="tab" onclick="switchTab('tasks')">⚙️ Úlohy</div>
+    <div class="tab" onclick="switchTab('log')">📋 Hotové veci</div>
+  </div>
+
+  <!-- PIPELINE -->
+  <div id="panel-belt" class="panel active">
+    <div class="pg-outer">
+      <div class="pg-header">
+        <span class="pg-title">Výrobná linka</span>
+        <span id="data-badge" class="data-badge loading"><span class="badge-dot"></span><span id="badge-text">Načítavam...</span></span>
+      </div>
+      <div class="pg-nodes" id="pg-nodes"></div>
+
+      <!-- Stage detail panel — expands on node click -->
+      <div id="stage-detail" class="stage-detail" style="display:none"></div>
+
+      <div class="pg-apps" id="pg-apps">
+        <div class="pg-no-apps" id="pg-empty">Žiadne appky v pipeline. Spusti prvú appku z Autolauncher.</div>
+      </div>
+    </div>
+
+    <!-- ACTIVE SESSIONS -->
+    <div class="section-block" id="sessions-block">
+      <div class="section-header">
+        <span class="section-title">⚡ Aktívne sessions</span>
+        <span class="section-sub" id="sessions-updated"></span>
+      </div>
+      <div id="sessions-list"><div class="empty">Načítavam...</div></div>
+    </div>
+
+    <!-- SYSTEM VITALS -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-title">🩺 System Vitals</span>
+        <span class="section-sub" id="vitals-updated"></span>
+        <button class="refresh-btn" onclick="runVitals()">↻ Refresh</button>
+      </div>
+      <div class="vitals-groups" id="vitals-container"><div class="empty">Načítavam...</div></div>
+    </div>
+  </div>
+
+  <!-- PROMPTS -->
+  <div id="panel-prompts" class="panel">
+    <div class="prompts-toolbar">
+      <button class="new-prompt-btn" onclick="openNewPrompt()">+ Nový prompt</button>
+    </div>
+    <div id="new-prompt-form" style="display:none" class="np-form">
+      <div class="np-row">
+        <div class="np-field"><label>Názov</label><input id="np-title" type="text" placeholder="Napr. Generovanie popisu" /></div>
+        <div class="np-field np-field-sm"><label>Fáza</label><input id="np-stage" type="text" placeholder="Napr. Idea" /></div>
+        <div class="np-field np-field-sm"><label>Model</label>
+          <select id="np-model"><option value="claude-sonnet-4-5">Sonnet</option><option value="claude-haiku-4-5">Haiku</option></select>
+        </div>
+      </div>
+      <div class="np-field"><label>Popis</label><input id="np-desc" type="text" placeholder="Čo tento prompt robí" /></div>
+      <div class="np-field"><label>Prompt text</label><textarea id="np-text" rows="4" placeholder="You are an expert..."></textarea></div>
+      <div class="np-actions">
+        <button class="prompt-btn save" onclick="saveNewPrompt()">✓ Uložiť</button>
+        <button class="prompt-btn" onclick="closeNewPrompt()">Zrušiť</button>
+      </div>
+    </div>
+    <div id="prompts-container"><div class="empty">Načítavam...</div></div>
+  </div>
+
+  <!-- TASKS -->
+  <div id="panel-tasks" class="panel">
+    <div class="task-filters">
+      <div class="filter-btn active" onclick="filterTasks('all',this)">Všetky</div>
+      <div class="filter-btn" onclick="filterTasks('backend',this)">Backend</div>
+      <div class="filter-btn" onclick="filterTasks('ios',this)">iOS</div>
+      <div class="filter-btn" onclick="filterTasks('android',this)">Android</div>
+      <div class="filter-btn" onclick="filterTasks('infra',this)">Infra</div>
+    </div>
+    <div id="task-container"><div class="empty">Načítavam...</div></div>
+
+    <!-- APPROVAL LOG -->
+    <div style="margin-top:20px">
+      <div style="font-size:10px;font-weight:700;color:#252525;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid #111;display:flex;align-items:center;justify-content:space-between">
+        <span>📋 Log schválení</span>
+        <button onclick="clearApprovalLog()" style="font-size:9px;color:#2a2a2a;background:none;border:none;cursor:pointer;padding:0">vymazať</button>
+      </div>
+      <div id="approval-log"><div class="empty" style="padding:12px 0">Žiadne schválenia.</div></div>
+    </div>
+  </div>
+
+  <!-- LOG -->
+  <div id="panel-log" class="panel">
     <div id="log-container"><div class="empty">Načítavam...</div></div>
   </div>
-  <script>
-    async function load() {
-      try {
-        const res = await fetch('log.json?v=' + Date.now());
-        const data = await res.json();
-        render(data);
-      } catch(e) {
-        document.getElementById('log-container').innerHTML =
-          '<div class="empty">Žiadne záznamy ešte.</div>';
-      }
+</div>
+
+<script>
+// ===== TABS =====
+const tabNames = ['belt','prompts','tasks','log'];
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', tabNames[i]===name));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+}
+
+// ===== PIPELINE =====
+const STAGES = [
+  { id:'idea',       icon:'💡', label:'Idea' },
+  { id:'validation', icon:'🔍', label:'Validácia' },
+  { id:'codegen',    icon:'✍️', label:'Kód' },
+  { id:'tests',      icon:'🧪', label:'Testy' },
+  { id:'build',      icon:'🏗️', label:'Build' },
+  { id:'listing',    icon:'📝', label:'Listing' },
+  { id:'store',      icon:'🚀', label:'Store' },
+];
+
+// Sub-steps for each stage
+const STAGE_DETAIL = {
+  idea: {
+    desc: 'AI analyzuje ideu, generuje App Concept a rozhodne či ju budovať',
+    steps: [
+      { name: 'Prijatie idey od používateľa', key: 'receive' },
+      { name: 'AI analýza — meno, popis, cieľová skupina', key: 'analyze' },
+      { name: 'Výber kategórie App Store / Google Play', key: 'categorize' },
+      { name: 'Definícia 3 kľúčových funkcií', key: 'features' },
+      { name: 'Odovzdanie do Validácie', key: 'handoff' },
+    ]
+  },
+  validation: {
+    desc: 'Overenie trhového potenciálu — BUILD / SKIP / PIVOT',
+    steps: [
+      { name: 'Analýza konkurencie na App Store', key: 'competition' },
+      { name: 'Odhad dopytu a kľúčových slov', key: 'demand' },
+      { name: 'Monetizačný potenciál (ads/IAP/sub)', key: 'monetization' },
+      { name: 'Skóre 1–10 + odporúčanie', key: 'score' },
+      { name: 'Rozhodnutie: BUILD / SKIP / PIVOT', key: 'decision' },
+    ]
+  },
+  codegen: {
+    desc: 'Generovanie produkčného Swift/React kódu',
+    steps: [
+      { name: 'Výber tech stacku (SwiftUI / React Native)', key: 'stack' },
+      { name: 'Generovanie UI komponentov', key: 'ui' },
+      { name: 'Generovanie business logiky', key: 'logic' },
+      { name: 'Generovanie API integrácie', key: 'api' },
+      { name: 'Commit kódu do GitHub repo', key: 'commit' },
+    ]
+  },
+  tests: {
+    desc: 'Automatické testy a statická analýza kódu',
+    steps: [
+      { name: 'SwiftLint / ESLint statická analýza', key: 'lint' },
+      { name: 'Unit testy — generovanie a spustenie', key: 'unit' },
+      { name: 'UI testy — základné flows', key: 'ui_test' },
+      { name: 'Vyhodnotenie — pass/fail/fix', key: 'evaluate' },
+      { name: 'Auto-fix loop (max 3×)', key: 'autofix' },
+    ]
+  },
+  build: {
+    desc: 'Fastlane build na Mac Mini M4 (iOS) alebo VPS (Android)',
+    steps: [
+      { name: 'SSH pripojenie na Mac Mini / VPS', key: 'connect' },
+      { name: 'Inštalácia závislostí (pod install / npm)', key: 'deps' },
+      { name: 'Kompilácia (xcodebuild / gradle)', key: 'compile' },
+      { name: 'Code signing (Apple cert / keystore)', key: 'sign' },
+      { name: 'Export IPA / APK / AAB', key: 'export' },
+    ]
+  },
+  listing: {
+    desc: 'AI generuje App Store / Google Play listing',
+    steps: [
+      { name: 'Generovanie nadpisu (max 30 znakov)', key: 'title' },
+      { name: 'Generovanie podnadpisu', key: 'subtitle' },
+      { name: 'Generovanie popisu (4000 znakov)', key: 'description' },
+      { name: 'Generovanie kľúčových slov (ASO)', key: 'keywords' },
+      { name: 'Generovanie screenshotov (AI)', key: 'screenshots' },
+    ]
+  },
+  store: {
+    desc: 'Upload do App Store Connect / Google Play Console',
+    steps: [
+      { name: 'Autentifikácia (API key / service account)', key: 'auth' },
+      { name: 'Upload IPA / AAB na server', key: 'upload' },
+      { name: 'Nastavenie metadát a listingu', key: 'metadata' },
+      { name: 'Submit na review', key: 'submit' },
+      { name: 'Potvrdenie a notifikácia', key: 'notify' },
+    ]
+  }
+};
+
+let selectedStage = null;
+let _currentApps = [];
+
+// NO MOCK DATA — rule: never show fake data in any screen
+
+function stageIndex(s) { return STAGES.findIndex(x=>x.id===s); }
+
+function getNodeClass(apps, stageId) {
+  const here = apps.filter(a => a.stage === stageId);
+  if (here.some(a=>a.status==='error'))   return 'nc-error';
+  if (here.some(a=>a.status==='running')) return 'nc-running';
+  if (here.some(a=>a.status==='done'))    return 'nc-done';
+  return 'nc-idle';
+}
+
+function getConnClass(apps, fromIdx) {
+  // connector between stage[fromIdx] and stage[fromIdx+1]
+  // "active" if apps at fromIdx are running
+  const here = apps.filter(a => stageIndex(a.stage) === fromIdx);
+  if (here.some(a=>a.status==='error'))   return 'conn-error';
+  if (here.some(a=>a.status==='running')) return 'conn-active';
+  return 'conn-idle';
+}
+
+function renderNodes(apps) {
+  _currentApps = apps;
+  const wrap = document.getElementById('pg-nodes');
+  let html = '';
+  STAGES.forEach((st, i) => {
+    const nc = getNodeClass(apps, st.id);
+    const here = apps.filter(a => a.stage === st.id);
+    const countHtml = here.length > 0
+      ? `<span class="node-count ${here.some(a=>a.status==='error')?'nc-count-err':'nc-count-run'}">${here.length}</span>`
+      : '';
+    const nlClass = here.length > 0 ? 'nl-active' : '';
+    const selClass = selectedStage === st.id ? 'selected' : '';
+    html += `<div class="pg-node-wrap">
+      <div class="pg-node">
+        <div class="node-circle ${nc} ${selClass}" onclick="toggleStageDetail('${st.id}')" title="Klikni pre detail">${st.icon}${countHtml}</div>
+        <div class="node-label ${nlClass}">${st.label}</div>
+      </div>`;
+    if (i < STAGES.length - 1) {
+      const cc = getConnClass(apps, i);
+      html += `<div class="pg-connector ${cc}"></div>`;
     }
+    html += '</div>';
+  });
+  wrap.innerHTML = html;
+}
 
-    function render(entries) {
-      if (!entries || entries.length === 0) {
-        document.getElementById('log-container').innerHTML =
-          '<div class="empty">Žiadne záznamy ešte.</div>';
-        return;
-      }
+function toggleStageDetail(stageId) {
+  const panel = document.getElementById('stage-detail');
+  if (selectedStage === stageId) {
+    // Close
+    selectedStage = null;
+    panel.style.display = 'none';
+    renderNodes(_currentApps);
+    return;
+  }
+  selectedStage = stageId;
+  renderNodes(_currentApps);
+  showStageDetail(stageId, _currentApps);
+}
 
-      // Zoskup podľa dňa
-      const days = {};
-      for (const e of entries) {
-        const d = e.date || e.datetime?.split('T')[0] || 'Neznámy dátum';
-        if (!days[d]) days[d] = [];
-        days[d].push(e);
-      }
+function getStepStatus(stageId, stepKey, apps) {
+  // Determine step status based on apps currently in this stage or past it
+  const si = stageIndex(stageId);
+  const hasAppHere = apps.some(a => stageIndex(a.stage) === si);
+  const hasAppPast = apps.some(a => stageIndex(a.stage) > si);
+  const hasError = apps.some(a => a.stage === stageId && a.status === 'error');
 
-      const keys = Object.keys(days).sort().reverse();
-      let html = '';
-      for (const day of keys) {
-        const label = formatDay(day);
-        html += `<div class="day-group"><div class="day-header">${label}</div>`;
-        for (const e of days[day]) {
-          const tagHtml = e.tag ? `<span class="tag tag-${e.tag}">${tagLabel(e.tag)}</span>` : '';
-          html += `
-            <div class="entry">
-              <div class="time">${e.time || ''}</div>
-              <div class="content">
-                <div class="title">${e.title}${tagHtml}</div>
-                ${e.desc ? `<div class="desc">${e.desc}</div>` : ''}
-              </div>
-            </div>`;
-        }
-        html += '</div>';
-      }
-      document.getElementById('log-container').innerHTML = html;
+  if (hasError) return 'error';
+  if (hasAppPast) return 'done';
+  if (hasAppHere) return 'running';
+  return 'waiting';
+}
+
+function showStageDetail(stageId, apps) {
+  const panel = document.getElementById('stage-detail');
+  const stage = STAGES.find(s => s.id === stageId);
+  const detail = STAGE_DETAIL[stageId];
+  if (!stage || !detail) return;
+
+  const appsHere = apps.filter(a => a.stage === stageId);
+  const globalStatus = getStepStatus(stageId, null, apps);
+
+  // Determine each step's status
+  const steps = detail.steps.map((step, idx) => {
+    let ss = 'waiting';
+    if (globalStatus === 'done') ss = 'done';
+    else if (globalStatus === 'error') ss = idx === detail.steps.length - 1 ? 'error' : 'done';
+    else if (globalStatus === 'running') {
+      // Simulate progress — first N steps done, current running, rest waiting
+      const runningIdx = appsHere.length > 0 ? Math.floor(Date.now() / 8000) % detail.steps.length : 0;
+      if (idx < runningIdx) ss = 'done';
+      else if (idx === runningIdx) ss = 'running';
+      else ss = 'waiting';
     }
+    return { ...step, ss };
+  });
 
-    function formatDay(d) {
-      try {
-        const date = new Date(d);
-        return date.toLocaleDateString('sk-SK', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-      } catch { return d; }
+  const statusText = { done:'✓ Hotovo', running:'⟳ Prebieha', error:'✕ Chyba', waiting:'— Čaká' };
+
+  let appsHtml = '';
+  if (appsHere.length > 0) {
+    const chips = appsHere.map(a => {
+      const col = {running:'#4caf50',error:'#ef5350',done:'#64b5f6',pending:'#333'}[a.status]||'#333';
+      return `<div class="app-chip chip-${a.status}"><span class="chip-dot" style="background:${col}"></span><span class="chip-name">${a.name}</span></div>`;
+    }).join('');
+    appsHtml = `<div class="detail-apps-here"><div class="detail-apps-label">Appky v tomto kroku</div><div class="detail-apps-list">${chips}</div></div>`;
+  }
+
+  panel.innerHTML = `
+    <div class="detail-header">
+      <span class="detail-icon">${stage.icon}</span>
+      <div>
+        <div class="detail-title">${stage.label}</div>
+        <div class="detail-desc">${detail.desc}</div>
+      </div>
+      <span class="detail-close" onclick="toggleStageDetail('${stageId}')">✕</span>
+    </div>
+    <div class="substeps">
+      ${steps.map(s => `
+        <div class="substep ss-${s.ss}">
+          <div class="ss-dot"></div>
+          <div class="ss-name">${s.name}</div>
+          <div class="ss-status">${statusText[s.ss]||''}</div>
+        </div>`).join('')}
+    </div>
+    ${appsHtml}
+  `;
+  panel.style.display = 'block';
+}
+
+function renderAppChips(apps) {
+  const wrap = document.getElementById('pg-apps');
+  const empty = document.getElementById('pg-empty');
+  if (!apps || apps.length === 0) { empty.style.display='block'; wrap.innerHTML='<div class="pg-no-apps">Žiadne appky v pipeline.</div>'; return; }
+  if (empty) empty.style.display='none';
+
+  // Group by stage
+  const byStage = {};
+  STAGES.forEach(s => byStage[s.id] = []);
+  apps.forEach(a => { if (byStage[a.stage]) byStage[a.stage].push(a); });
+
+  const cols = STAGES.map(s => {
+    const chips = byStage[s.id].map(a => {
+      const color = {running:'#4caf50', error:'#ef5350', done:'#64b5f6', pending:'#333'}[a.status]||'#333';
+      const cls = 'chip-'+(a.status||'pending');
+      return `<div class="app-chip ${cls}"><span class="chip-dot" style="background:${color}"></span><span class="chip-name">${a.name}</span></div>`;
+    }).join('');
+    return `<div class="pg-stage-col">${chips}</div>`;
+  }).join('');
+
+  wrap.innerHTML = `<div class="pg-stage-cols" style="grid-template-columns:repeat(${STAGES.length},1fr)">${cols}</div>`;
+}
+
+function setBadge(mode, count) {
+  const el = document.getElementById('data-badge');
+  const txt = document.getElementById('badge-text');
+  el.className = 'data-badge ' + mode;
+  if (mode === 'live') txt.textContent = '🟢 LIVE  —  ' + count + ' appiek';
+  else if (mode === 'demo') txt.textContent = '🟡 DEMO  —  ukážkové dáta';
+  else txt.textContent = 'Načítavam...';
+}
+
+function showOffline() {
+  setBadge('offline', 0);
+  // render idle nodes (no apps)
+  renderNodes([]);
+  const wrap = document.getElementById('pg-apps');
+  wrap.innerHTML = '<div class="pg-no-apps" style="color:#2a2a2a">Backend offline — žiadne dáta</div>';
+}
+
+function setBadge(mode, count) {
+  const el = document.getElementById('data-badge');
+  const txt = document.getElementById('badge-text');
+  if (mode === 'live') {
+    el.className = 'data-badge live';
+    txt.textContent = '🟢 LIVE  —  ' + count + ' appiek';
+  } else if (mode === 'offline') {
+    el.className = 'data-badge demo';
+    txt.textContent = '🔴 Backend offline';
+  } else {
+    el.className = 'data-badge loading';
+    txt.textContent = 'Načítavam...';
+  }
+}
+
+async function loadPipeline() {
+  try {
+    const r = await fetch('https://autolauncher-backend.onrender.com/api/pipeline/status');
+    if (r.ok) {
+      const d = await r.json();
+      const apps = d.apps || [];
+      setBadge('live', apps.length);
+      renderNodes(apps);
+      renderAppChips(apps);
+      return;
     }
+  } catch {}
+  showOffline();
+}
 
-    function tagLabel(t) {
-      return { done: '✓ Hotovo', infra: '⚙ Infraštruktúra', fix: '🔧 Oprava' }[t] || t;
+loadPipeline();
+setInterval(loadPipeline, 15000);
+
+// ===== TASKS =====
+let allTasks = [], currentFilter = 'all';
+const AK = 'approved_tasks';
+const ALK = 'approval_log';
+const getApproved = () => { try { return JSON.parse(localStorage.getItem(AK)||'[]'); } catch { return []; } };
+const getApprovalLog = () => { try { return JSON.parse(localStorage.getItem(ALK)||'[]'); } catch { return []; } };
+
+function approve(id) {
+  const l = getApproved();
+  if (l.includes(id)) return;
+  l.push(id);
+  localStorage.setItem(AK, JSON.stringify(l));
+  // Log it
+  const task = allTasks.find(t=>t.id===id);
+  const log = getApprovalLog();
+  log.unshift({ id, title: task?.title||id, category: task?.category||'', ts: new Date().toISOString() });
+  localStorage.setItem(ALK, JSON.stringify(log.slice(0, 100)));
+  renderTasks(allTasks, currentFilter);
+  renderApprovalLog();
+}
+
+function clearApprovalLog() {
+  if (!confirm('Vymazať celý log?')) return;
+  localStorage.removeItem(ALK);
+  renderApprovalLog();
+}
+
+function renderApprovalLog() {
+  const log = getApprovalLog();
+  const el = document.getElementById('approval-log');
+  if (!el) return;
+  if (!log.length) { el.innerHTML='<div class="empty" style="padding:12px 0">Žiadne schválenia.</div>'; return; }
+  const catLabel={backend:'Backend',ios:'iOS',android:'Android',infra:'Infra'};
+  const catCls={backend:'cat-backend',ios:'cat-ios',android:'cat-android',infra:'cat-infra'};
+  el.innerHTML = log.map(e => {
+    const d = new Date(e.ts);
+    const dateStr = d.toLocaleDateString('sk-SK',{day:'numeric',month:'numeric'});
+    const timeStr = d.toLocaleTimeString('sk-SK',{hour:'2-digit',minute:'2-digit'});
+    return `<div class="alog-entry">
+      <span class="alog-time">${dateStr} ${timeStr}</span>
+      <span class="alog-title">${e.title}</span>
+      <span class="alog-cat cat-badge ${catCls[e.category]||''}">${catLabel[e.category]||e.category}</span>
+    </div>`;
+  }).join('');
+}
+function filterTasks(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTasks(allTasks, cat);
+}
+function renderTasks(tasks, filter) {
+  const approved = getApproved();
+  const filtered = filter==='all' ? tasks : tasks.filter(t=>t.category===filter);
+  if (!filtered.length) { document.getElementById('task-container').innerHTML='<div class="empty">Žiadne úlohy.</div>'; return; }
+  const sorted = [...filtered].sort((a,b)=>{
+    const isDoneA=a.status==='done', isDoneB=b.status==='done';
+    const isAppA=a.source==='user'||approved.includes(a.id), isAppB=b.source==='user'||approved.includes(b.id);
+    const sa=isDoneA?2:isAppA?1:0, sb=isDoneB?2:isAppB?1:0;
+    if(sa!==sb) return sa-sb;
+    const p={high:0,medium:1,low:2}; return (p[a.priority]||1)-(p[b.priority]||1);
+  });
+  const catLabel={backend:'Backend',ios:'iOS',android:'Android',infra:'Infra'};
+  document.getElementById('task-container').innerHTML = sorted.map(t=>{
+    const isUserTask = t.source==='user';
+    const isApproved = isUserTask || approved.includes(t.id);
+    const isDone = t.status==='done';
+    const sc = isDone?'status-done':isApproved?'status-approved':'';
+    let act;
+    if (isDone) act='<span class="done-label">✓ Hotovo</span>';
+    else if (isUserTask) act='<span class="approved-label">✓ Tvoja požiadavka</span>';
+    else if (approved.includes(t.id)) act='<span class="approved-label">✓ Schválené</span>';
+    else act=`<button class="approve-btn" onclick="approve('${t.id}')">Schváliť</button>`;
+    return `<div class="task ${sc}"><div class="task-header"><div class="priority priority-${t.priority}"></div><div class="task-title">${t.title}</div><span class="cat-badge cat-${t.category}">${catLabel[t.category]||t.category}</span>${act}</div><div class="task-desc">${t.desc}</div></div>`;
+  }).join('');
+}
+async function loadTasks(){
+  try{
+    allTasks=await(await fetch('tasks.json?v='+Date.now())).json();
+    renderTasks(allTasks,currentFilter);
+    renderApprovalLog();
+  }catch{document.getElementById('task-container').innerHTML='<div class="empty">Chyba.</div>';}
+}
+
+// ===== LOG =====
+async function loadLog(){
+  try{
+    const data=await(await fetch('log.json?v='+Date.now())).json();
+    const days={};
+    for(const e of data){const d=e.date||'?';if(!days[d])days[d]=[];days[d].push(e);}
+    let html='';
+    for(const day of Object.keys(days).sort().reverse()){
+      html+=`<div class="day-group"><div class="day-header">${fmtDay(day)}</div>`;
+      for(const e of days[day]){
+        const tag=e.tag?`<span class="tag tag-${e.tag}">${{done:'✓ Hotovo',infra:'⚙ Infra',fix:'🔧 Oprava'}[e.tag]||e.tag}</span>`:'';
+        html+=`<div class="entry"><div class="etime">${e.time||''}</div><div class="econtent"><div class="etitle">${e.title}${tag}</div>${e.desc?`<div class="edesc">${e.desc}</div>`:''}</div></div>`;
+      }
+      html+='</div>';
     }
+    document.getElementById('log-container').innerHTML=html||'<div class="empty">Žiadne záznamy.</div>';
+  }catch{document.getElementById('log-container').innerHTML='<div class="empty">Chyba.</div>';}
+}
+function fmtDay(d){try{return new Date(d).toLocaleDateString('sk-SK',{weekday:'long',day:'numeric',month:'long',year:'numeric'});}catch{return d;}}
 
-    load();
-  </script>
+// ===== PROMPTS (backend-driven) =====
+const API = 'https://autolauncher-backend.onrender.com';
+let _authToken = null;
+
+async function getToken() {
+  if (_authToken) return _authToken;
+  try {
+    const r = await fetch(API+'/api/auth/login', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({email:'marcel.kamon@gmail.com', password:'Admin123!'})
+    });
+    if (r.ok) { const d=await r.json(); _authToken=d.access_token; return _authToken; }
+  } catch {}
+  return null;
+}
+
+function openNewPrompt(){document.getElementById('new-prompt-form').style.display='block';document.getElementById('np-title').focus();}
+function closeNewPrompt(){document.getElementById('new-prompt-form').style.display='none';['np-title','np-stage','np-desc','np-text'].forEach(id=>document.getElementById(id).value='');}
+
+async function saveNewPrompt(){
+  const title=document.getElementById('np-title').value.trim();
+  const stage=document.getElementById('np-stage').value.trim();
+  const desc=document.getElementById('np-desc').value.trim();
+  const text=document.getElementById('np-text').value.trim();
+  const model=document.getElementById('np-model').value;
+  if(!title||!text){alert('Názov a text sú povinné.');return;}
+  const token = await getToken();
+  if (!token) { alert('Backend nedostupný — skús neskôr'); return; }
+  try {
+    const r = await fetch(API+'/api/metaprompts', {
+      method:'POST', headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+      body: JSON.stringify({stage:stage||'Vlastný',title,description:desc,prompt:text,model})
+    });
+    if (r.ok) { closeNewPrompt(); loadPrompts(); }
+    else alert('Chyba ukladania: '+(await r.text()));
+  } catch(e) { alert('Chyba: '+e.message); }
+}
+
+async function deletePrompt(id){
+  if(!confirm('Zmazať?'))return;
+  const token=await getToken();
+  if(!token)return;
+  await fetch(API+'/api/metaprompts/'+id,{method:'DELETE',headers:{'Authorization':'Bearer '+token}});
+  loadPrompts();
+}
+
+function togglePrompt(id){const b=document.getElementById('pb-'+id),a=document.getElementById('pa-'+id),o=b.classList.contains('open');b.classList.toggle('open',!o);a.classList.toggle('open',!o);}
+
+function editPrompt(id,orig){
+  const el=document.getElementById('pt-'+id);
+  el.setAttribute('contenteditable','true'); el.focus();
+  el.dataset.orig=orig;
+  document.getElementById('pact-edit-'+id).style.display='none';
+  document.getElementById('pact-save-'+id).style.display='flex';
+}
+
+async function savePromptEdit(id){
+  const el=document.getElementById('pt-'+id);
+  const newText=el.innerText.trim();
+  const token=await getToken();
+  if(token){
+    await fetch(API+'/api/metaprompts/'+id,{
+      method:'PUT', headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+      body:JSON.stringify({prompt:newText})
+    });
+  }
+  el.setAttribute('contenteditable','false');
+  document.getElementById('pact-edit-'+id).style.display='flex';
+  document.getElementById('pact-save-'+id).style.display='none';
+  const n=document.getElementById('pnote-'+id);
+  n.style.display='inline'; setTimeout(()=>n.style.display='none',2000);
+}
+
+function cancelPromptEdit(id){
+  const el=document.getElementById('pt-'+id);
+  el.innerText=el.dataset.orig||'';
+  el.setAttribute('contenteditable','false');
+  document.getElementById('pact-edit-'+id).style.display='flex';
+  document.getElementById('pact-save-'+id).style.display='none';
+}
+
+function buildPromptCard(p){
+  const ms=p.model?.includes('sonnet')?'Sonnet':p.model?.includes('haiku')?'Haiku':(p.model||'');
+  const pid=p.id; const text=p.prompt||'';
+  return `<div class="prompt-card">
+    <div class="prompt-header" onclick="togglePrompt(${pid})">
+      <span class="stage-badge">${p.stage||'?'}</span>
+      <span class="prompt-title">${p.title}</span>
+      <span class="prompt-model">${ms}</span>
+      <button class="prompt-delete" onclick="event.stopPropagation();deletePrompt(${pid})">🗑</button>
+      <span class="prompt-toggle" id="pa-${pid}">▾</span>
+    </div>
+    <div class="prompt-body" id="pb-${pid}">
+      ${p.description?`<div class="prompt-desc">${p.description}</div>`:''}
+      <div class="prompt-text" id="pt-${pid}">${text}</div>
+      <div class="prompt-actions" id="pact-edit-${pid}">
+        <button class="prompt-btn" onclick="editPrompt(${pid},${JSON.stringify(text)})">✏️ Upraviť</button>
+        <span class="saved-note" id="pnote-${pid}">✓ Uložené</span>
+      </div>
+      <div class="prompt-actions" id="pact-save-${pid}" style="display:none">
+        <button class="prompt-btn save" onclick="savePromptEdit(${pid})">✓ Uložiť</button>
+        <button class="prompt-btn cancel" onclick="cancelPromptEdit(${pid})">Zrušiť</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function loadPrompts(){
+  const container=document.getElementById('prompts-container');
+  try {
+    // Try backend first
+    const r = await fetch(API+'/api/metaprompts');
+    if (r.ok) {
+      const data=await r.json();
+      container.innerHTML=data.length ? data.map(buildPromptCard).join('') : '<div class="empty">Žiadne prompty. Pridaj prvý cez + Nový prompt.</div>';
+      return;
+    }
+  } catch {}
+  // Fallback to static file
+  try {
+    const data=await(await fetch('metaprompts.json?v='+Date.now())).json();
+    container.innerHTML=data.map(p=>buildPromptCard({...p,id:p.id})).join('');
+  } catch { container.innerHTML='<div class="empty">Backend offline.</div>'; }
+}
+
+// ===== SESSIONS =====
+async function loadSessions() {
+  try {
+    const data = await (await fetch('sessions.json?v='+Date.now())).json();
+    const el = document.getElementById('sessions-list');
+    const upd = document.getElementById('sessions-updated');
+    upd.textContent = 'aktualizované ' + new Date().toLocaleTimeString('sk-SK');
+    if (!data.length) { el.innerHTML='<div class="no-sessions">Žiadne aktívne sessions</div>'; return; }
+    const typeClass = {main:'sess-type-main', sub:'sess-type-sub', cron:'sess-type-cron'};
+    const typeLabel = {main:'Hlavná', sub:'Subagent', cron:'Cron'};
+    const dotClass  = {active:'active', idle:'idle', working:'working', waiting:'waiting'};
+    el.innerHTML = data.map(s => {
+      const since = s.since ? timeSince(s.since) : '';
+      return `<div class="session-row">
+        <div class="sess-dot ${dotClass[s.status]||'idle'}"></div>
+        <div class="sess-info">
+          <div class="sess-label">${s.label}</div>
+          <div class="sess-task">${s.task||'—'}</div>
+        </div>
+        ${s.app ? `<span class="sess-app">${s.app}</span>` : ''}
+        <span class="sess-type-badge ${typeClass[s.type]||'sess-type-sub'}">${typeLabel[s.type]||s.type}</span>
+        ${since ? `<span class="sess-since">${since}</span>` : ''}
+      </div>`;
+    }).join('');
+  } catch { document.getElementById('sessions-list').innerHTML='<div class="no-sessions">Chyba načítavania</div>'; }
+}
+
+function timeSince(iso) {
+  const sec = Math.floor((Date.now() - new Date(iso).getTime()) / 1000);
+  if (sec < 60) return sec+'s';
+  if (sec < 3600) return Math.floor(sec/60)+'m';
+  return Math.floor(sec/3600)+'h';
+}
+
+// ===== VITALS =====
+let vitalsConfig = [];
+
+async function pingUrl(url, timeoutMs=8000) {
+  const start = Date.now();
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(()=>ctrl.abort(), timeoutMs);
+    const r = await fetch(url, {method:'GET', signal:ctrl.signal, mode:'no-cors'});
+    clearTimeout(timer);
+    const ms = Date.now()-start;
+    // no-cors always returns opaque response (status 0) — but no error = reachable
+    return { ok: true, ms, status: r.status||'✓' };
+  } catch(e) {
+    return { ok: false, ms: Date.now()-start, error: e.name==='AbortError'?'timeout':'unreachable' };
+  }
+}
+
+async function pingAuth(url, body, timeoutMs=8000) {
+  const start = Date.now();
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(()=>ctrl.abort(), timeoutMs);
+    const r = await fetch(url, {
+      method:'POST', signal:ctrl.signal,
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(body)
+    });
+    clearTimeout(timer);
+    const ms = Date.now()-start;
+    return { ok: r.status===200, ms, status: r.status };
+  } catch(e) {
+    return { ok: false, ms: Date.now()-start, error: e.name==='AbortError'?'timeout':'unreachable' };
+  }
+}
+
+function vClass(res) {
+  if (!res) return 'v-check';
+  if (res.error==='timeout' || res.ms>5000) return 'v-slow';
+  if (!res.ok && res.error) return 'v-err';
+  return 'v-ok';
+}
+
+function vStatusText(res, hasAuth) {
+  if (!res) return 'Čakám...';
+  if (res.error==='timeout') return '⚠ Timeout';
+  if (res.error) return '✕ ' + res.error;
+  if (hasAuth && !res.ok) return '✕ Auth chyba ('+res.status+')';
+  return '✓ Online';
+}
+
+async function runVitals() {
+  if (!vitalsConfig.length) return;
+  document.getElementById('vitals-updated').textContent = 'kontrolujem...';
+  const container = document.getElementById('vitals-container');
+
+  // Set all to checking
+  const results = {};
+  vitalsConfig.forEach(v => results[v.id] = null);
+  renderVitals(results);
+
+  // Run all checks in parallel
+  const checks = vitalsConfig.map(async v => {
+    const pingRes = await pingUrl(v.url);
+    results[v.id] = { ping: pingRes };
+    if (v.authUrl) {
+      const authRes = await pingAuth(v.authUrl, v.authBody);
+      results[v.id].auth = authRes;
+    }
+    renderVitals(results);
+  });
+
+  await Promise.all(checks);
+  document.getElementById('vitals-updated').textContent = 'aktualizované ' + new Date().toLocaleTimeString('sk-SK');
+}
+
+function renderVitals(results) {
+  const container = document.getElementById('vitals-container');
+  const groups = {};
+  vitalsConfig.forEach(v => {
+    if (!groups[v.group]) groups[v.group] = [];
+    groups[v.group].push(v);
+  });
+  const groupLabel = {backend:'Backend', frontend:'Frontend', auth:'Auth'};
+  let html = '<div class="vitals-groups">';
+  for (const [grp, items] of Object.entries(groups)) {
+    html += `<div><div class="vitals-group-label">${groupLabel[grp]||grp}</div><div class="vitals-grid">`;
+    for (const v of items) {
+      const r = results[v.id];
+      // Main ping
+      const ping = r?.ping;
+      const pClass = vClass(ping);
+      const pText = vStatusText(ping, false);
+      const ms = ping?.ms ? ping.ms+'ms' : '';
+      html += `<div class="vital-card ${pClass}">
+        <div class="vital-dot"></div>
+        <div class="vital-info">
+          <div class="vital-label">${v.label}</div>
+          <div class="vital-status">${pText}${r?.auth ? ' · Auth: '+(r.auth.ok?'✓':'✕ '+r.auth.status) : ''}</div>
+        </div>
+        <div class="vital-ms">${ms}</div>
+      </div>`;
+    }
+    html += '</div></div>';
+  }
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+async function loadVitals() {
+  try {
+    vitalsConfig = await (await fetch('vitals.json?v='+Date.now())).json();
+    runVitals();
+    setInterval(runVitals, 30000);
+  } catch { document.getElementById('vitals-container').innerHTML='<div class="empty">Chyba.</div>'; }
+}
+
+loadSessions();
+setInterval(loadSessions, 20000);
+loadVitals();
+loadLog(); loadTasks(); loadPrompts();
+
+// ===== AUTO-REFRESH (30s countdown) =====
+const REFRESH_SEC = 30;
+let refreshCountdown = REFRESH_SEC;
+const ticker = document.getElementById('refresh-ticker');
+
+function refreshAll() {
+  loadPipeline();
+  loadSessions();
+  loadLog();
+  loadTasks();
+  loadPrompts();
+  refreshCountdown = REFRESH_SEC;
+}
+
+setInterval(() => {
+  refreshCountdown--;
+  if (refreshCountdown <= 0) {
+    refreshAll();
+  } else {
+    ticker.textContent = '↻ ' + refreshCountdown + 's';
+  }
+}, 1000);
+</script>
 </body>
 </html>
