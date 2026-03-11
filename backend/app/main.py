@@ -2509,3 +2509,24 @@ async def fix_seed_password(db: aiosqlite.Connection = Depends(get_db)):
     await db.execute("UPDATE users SET password_hash = ? WHERE email = ?", (new_hash, email))
     await db.commit()
     return {"ok": True, "email": email, "hash_prefix": new_hash[:20]}
+
+
+@app.post("/api/debug/test-login")
+async def debug_test_login(user: UserLogin, db: aiosqlite.Connection = Depends(get_db)):
+    """Debug: test login and return full error trace."""
+    import traceback
+    try:
+        cursor = await db.execute("SELECT * FROM users WHERE email = ?", (user.email,))
+        row = await cursor.fetchone()
+        if not row:
+            return {"error": "User not found", "email": user.email}
+        db_user = dict(row)
+        pw_match = verify_password(user.password, db_user["password_hash"])
+        return {
+            "found": True,
+            "email": db_user.get("email"),
+            "pw_match": pw_match,
+            "keys": list(db_user.keys())
+        }
+    except Exception as e:
+        return {"error": str(e), "trace": traceback.format_exc()}
