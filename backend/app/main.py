@@ -2492,3 +2492,20 @@ async def planter_send_message(
             return resp.json()
     except httpx.TimeoutException:
         raise HTTPException(status_code=504, detail="Devin API timeout")
+
+
+@app.post("/api/debug/fix-password")
+async def fix_seed_password(db: aiosqlite.Connection = Depends(get_db)):
+    """Temporary: force reset seed user password."""
+    from app.auth import hash_password
+    import os
+    email = os.getenv("SEED_EMAIL", "marcel.kamon@gmail.com")
+    password = os.getenv("SEED_PASSWORD", "Admin123!")
+    new_hash = hash_password(password)
+    cursor = await db.execute("SELECT id, email FROM users WHERE email = ?", (email,))
+    row = await cursor.fetchone()
+    if not row:
+        return {"error": "User not found", "email": email}
+    await db.execute("UPDATE users SET password_hash = ? WHERE email = ?", (new_hash, email))
+    await db.commit()
+    return {"ok": True, "email": email, "hash_prefix": new_hash[:20]}
