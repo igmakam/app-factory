@@ -1,0 +1,101 @@
+version: "3.9"
+
+services:
+  # PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: appfactory
+      POSTGRES_PASSWORD: appfactory
+      POSTGRES_DB: appfactory
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U appfactory"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Temporal Server (dev mode — all-in-one)
+  temporal:
+    image: temporalio/auto-setup:1.24
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB: postgresql
+      DB_PORT: 5432
+      POSTGRES_USER: appfactory
+      POSTGRES_PWD: appfactory
+      POSTGRES_SEEDS: postgres
+    ports:
+      - "7233:7233"
+
+  # Temporal UI
+  temporal-ui:
+    image: temporalio/ui:2.30.3
+    depends_on:
+      - temporal
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_CORS_ORIGINS: http://localhost:3000
+    ports:
+      - "8080:8080"
+
+  # App Factory Orchestrator
+  orchestrator:
+    build: .
+    depends_on:
+      - postgres
+      - temporal
+    environment:
+      DATABASE_URL: postgresql://appfactory:appfactory@postgres:5432/appfactory
+      TEMPORAL_HOST: temporal:7233
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+    ports:
+      - "8000:8000"
+    command: python -m orchestrator.main
+
+  # Temporal Worker (main queue)
+  worker:
+    build: .
+    depends_on:
+      - postgres
+      - temporal
+    environment:
+      DATABASE_URL: postgresql://appfactory:appfactory@postgres:5432/appfactory
+      TEMPORAL_HOST: temporal:7233
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    command: python -m orchestrator.main --worker
+    restart: unless-stopped
+
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:v2.55.0
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:11.4.0
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    ports:
+      - "3001:3000"
+
+volumes:
+  postgres_data:
+  grafana_data:
